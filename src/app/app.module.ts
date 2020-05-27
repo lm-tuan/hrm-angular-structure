@@ -14,12 +14,14 @@ import { TutorialService } from './core/service/tutorialService';
 import { HttpClientModule } from '@angular/common/http';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { HomeModule } from './modules/home/home.module';
+import { NavComponent } from './layout/nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
     ContentLayoutComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,

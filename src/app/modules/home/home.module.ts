@@ -10,12 +10,12 @@ import { MaterialModule } from 'src/app/shared/material.module';
 @NgModule({
     declarations: [
         HomeComponent,
-        TutorialListComponent
+        TutorialListComponent,
     ],
     imports: [
         SharedModule,
         HomeRoutingModule,
-        MaterialModule
+        MaterialModule,
     ],
     exports: [],
     providers: [],

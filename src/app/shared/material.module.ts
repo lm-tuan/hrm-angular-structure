@@ -21,6 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
 import {CdkTableModule} from '@angular/cdk/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [],
   imports: [
@@ -44,7 +45,8 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    CdkTableModule
+    CdkTableModule,
+    MatProgressBarModule
   ],
   exports: [
     MatButtonModule,
@@ -67,7 +69,8 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    CdkTableModule
+    CdkTableModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialModule {}
