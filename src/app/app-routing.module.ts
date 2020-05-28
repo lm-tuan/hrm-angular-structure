@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
+import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,18 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: '',
+    component: CustomerLayoutComponent,
+    children: [
+      {
+        path: 'customers',
+        loadChildren: () =>
+          import('./modules/customers/customer.module').then(m => m.CustomerModule)
+      },
+    ]
+  },
+
   {
     path: 'auth',
     component: AuthLayoutComponent,

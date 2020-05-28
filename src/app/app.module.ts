@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { HomeModule } from './modules/home/home.module';
 import { NavComponent } from './layout/nav/nav.component';
+import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
+import { CustomerModule } from './modules/customers/customer.module';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import { NavComponent } from './layout/nav/nav.component';
     AuthLayoutComponent,
     ContentLayoutComponent,
     NavComponent,
+    CustomerLayoutComponent,
   ],
   imports: [
     BrowserModule,
     AuthModule,
     HomeModule,
+    CustomerModule,
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
