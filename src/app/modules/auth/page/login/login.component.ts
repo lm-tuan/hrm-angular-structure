@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TutorialService } from './../../../../core/service/tutorialService';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
@@ -11,7 +10,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   constructor(
-    private tutorialService: TutorialService,
     private formBuilder: FormBuilder,
   ) {
     this.buildForm();
@@ -22,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log('dfdfd');
+    console.log('dfdfd', this.loginForm.value);
   }
 
   get f() {

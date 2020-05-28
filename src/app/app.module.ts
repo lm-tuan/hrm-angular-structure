@@ -18,6 +18,8 @@ import { NavComponent } from './layout/nav/nav.component';
 import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
 import { CustomerModule } from './modules/customers/customer.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ContactComponent } from './modules/contact/contact.component';
+import { ContactModule } from './modules/contact/contact.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AuthModule,
     HomeModule,
     CustomerModule,
+    ContactModule,
     SharedModule,
     AppRoutingModule,
     HttpClientModule,

@@ -15,9 +15,19 @@ const routes: Routes = [
     component: ContentLayoutComponent,
     children: [
       {
-        path: 'dashboard',
+        path: 'dashboard-test',
         loadChildren: () =>
           import('./modules/home/home.module').then(m => m.HomeModule)
+      },
+      {
+        path: 'customers-test',
+        loadChildren: () =>
+        import('./modules/customers/customer.module').then(m => m.CustomerModule)
+      },
+      {
+        path: 'contact-test',
+        loadChildren: () =>
+        import('./modules/contact/contact.module').then(m => m.ContactModule)
       },
     ]
   },
@@ -26,7 +36,7 @@ const routes: Routes = [
     component: CustomerLayoutComponent,
     children: [
       {
-        path: 'customers',
+        path: 'customers-test1',
         loadChildren: () =>
           import('./modules/customers/customer.module').then(m => m.CustomerModule)
       },
