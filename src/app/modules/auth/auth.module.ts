@@ -6,6 +6,7 @@ import { MaterialModule } from 'src/app/shared/material.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ForgetPasswordComponent } from './page/forget-password/forget-password.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,8 @@ import { ForgetPasswordComponent } from './page/forget-password/forget-password.
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     AuthRoutingModule,
     MaterialModule
   ],
