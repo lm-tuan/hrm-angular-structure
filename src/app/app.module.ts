@@ -17,6 +17,7 @@ import { HomeModule } from './modules/home/home.module';
 import { NavComponent } from './layout/nav/nav.component';
 import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
 import { CustomerModule } from './modules/customers/customer.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import { CustomerModule } from './modules/customers/customer.module';
     CustomerLayoutComponent,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AuthModule,
     HomeModule,

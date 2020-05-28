@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TutorialService } from './../../../../core/service/tutorialService';
-import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,14 +9,31 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class LoginComponent implements OnInit {
-  constructor(private tutorialService: TutorialService) { }
-
-  ngOnInit(): void {
-    // this.tutorialService.getAll().subscribe( data => console.log(data));
+  loginForm: FormGroup;
+  constructor(
+    private tutorialService: TutorialService,
+    private formBuilder: FormBuilder,
+  ) {
+    this.buildForm();
   }
 
-  onLogin() {
+  ngOnInit(): void {
+    // console.log(this.loginForm);
+  }
+
+  login() {
+    console.log('dfdfd');
+  }
+
+  get f() {
+    return this.loginForm.controls;
+  }
+
+  private buildForm(): void {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
 }
-

@@ -11,7 +11,7 @@ export class TutorialListComponent implements OnInit {
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   tutorials: any;
   ngOnInit(): void {
-    this.tutorialService.getAll().subscribe(data => this.tutorials = data);
+    // this.tutorialService.getAll().subscribe(data => this.tutorials = data);
   }
 
 }
