@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserService } from 'src/app/core/service/user.service';
 
 export interface PeriodicElement {
   name: string;
@@ -27,11 +28,17 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./customer-list.component.scss']
 })
 export class CustomerListComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-  constructor() { }
+  displayedColumns: string[] = ['position', 'name', 'weight', 'address', 'symbol'];
+  dataSource;
+  constructor(
+    private userService: UserService,
+  ) { }
 
   ngOnInit(): void {
+    this.userService.getAll().subscribe(data => {
+      console.log('data', data);
+      this.dataSource = data;
+    });
   }
 
 }

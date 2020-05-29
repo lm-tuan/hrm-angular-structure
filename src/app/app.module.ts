@@ -23,6 +23,8 @@ import { ContactModule } from './modules/contact/contact.module';
 import { AuthService } from './core/service/authService';
 import { TokenStorageService } from './core/service/token-storage.service';
 import {Location } from '@angular/common';
+import { UserService } from './core/service/user.service';
+import { authInterceptorProviders } from './core/interceptor/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,7 @@ import {Location } from '@angular/common';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService, TokenStorageService ],
+  providers: [AuthService, TokenStorageService, UserService, authInterceptorProviders  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
