@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TokenStorageService } from 'src/app/core/service/token-storage.service';
+import { AuthService } from 'src/app/core/service/authService';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,18 +11,45 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  isLoggedIn = false;
+  isLoginFailed = false;
+  roles: string[] = [];
+  errorMessage = '';
   constructor(
     private formBuilder: FormBuilder,
+    private tokenStorage: TokenStorageService,
+    private authService: AuthService,
+   // private location: Location
+
   ) {
     this.buildForm();
   }
 
   ngOnInit(): void {
-    // console.log(this.loginForm);
+    // Check on brower have token
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+    }
   }
 
   login() {
-    console.log('dfdfd', this.loginForm.value);
+    this.authService.login(this.loginForm.value)
+      .subscribe(data => {
+        console.log('data', data);
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+        console.log('step finnal');
+        // window.location.reload();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+      );
   }
 
   get f() {

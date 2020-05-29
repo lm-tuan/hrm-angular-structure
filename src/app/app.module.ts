@@ -20,7 +20,9 @@ import { CustomerModule } from './modules/customers/customer.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactComponent } from './modules/contact/contact.component';
 import { ContactModule } from './modules/contact/contact.module';
-
+import { AuthService } from './core/service/authService';
+import { TokenStorageService } from './core/service/token-storage.service';
+import {Location } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,7 @@ import { ContactModule } from './modules/contact/contact.module';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [TutorialService],
+  providers: [AuthService, TokenStorageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
