@@ -25,9 +25,9 @@ const routes: Routes = [
         import('./modules/customers/customer.module').then(m => m.CustomerModule)
       },
       {
-        path: 'contact-test',
+        path: 'customers-test/contact-test',
         loadChildren: () =>
-        import('./modules/contact/contact.module').then(m => m.ContactModule)
+        import('./modules/add-forms/add-forms.module').then(m => m.AddFormModule)
       },
     ]
   },

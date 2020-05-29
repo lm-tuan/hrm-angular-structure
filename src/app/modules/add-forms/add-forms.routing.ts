@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ContactComponent } from './contact.component';
+import { AddFormCustomerComponent } from './add-form-customer/add-form-customer.component';
 
 export const routes: Routes = [
   {
@@ -10,7 +10,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: ContactComponent
+    component: AddFormCustomerComponent
   }
 ];
 
@@ -18,4 +18,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ContactRoutingModule {}
+export class AddFormRoutingModule {}

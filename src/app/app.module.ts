@@ -18,13 +18,12 @@ import { NavComponent } from './layout/nav/nav.component';
 import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
 import { CustomerModule } from './modules/customers/customer.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ContactComponent } from './modules/contact/contact.component';
-import { ContactModule } from './modules/contact/contact.module';
 import { AuthService } from './core/service/authService';
 import { TokenStorageService } from './core/service/token-storage.service';
 import {Location } from '@angular/common';
 import { UserService } from './core/service/user.service';
 import { authInterceptorProviders } from './core/interceptor/auth.interceptor';
+import { AddFormModule } from './modules/add-forms/add-forms.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +39,7 @@ import { authInterceptorProviders } from './core/interceptor/auth.interceptor';
     AuthModule,
     HomeModule,
     CustomerModule,
-    ContactModule,
+    AddFormModule,
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
