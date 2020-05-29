@@ -13,7 +13,6 @@ import { SharedModule } from './shared/shared.module';
 import { TutorialService } from './core/service/tutorialService';
 import { HttpClientModule } from '@angular/common/http';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
-import { HomeModule } from './modules/home/home.module';
 import { NavComponent } from './layout/nav/nav.component';
 import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
 import { CustomerModule } from './modules/customers/customer.module';
@@ -37,7 +36,6 @@ import { AddFormModule } from './modules/add-forms/add-forms.module';
     ReactiveFormsModule,
     BrowserModule,
     AuthModule,
-    HomeModule,
     CustomerModule,
     AddFormModule,
     SharedModule,

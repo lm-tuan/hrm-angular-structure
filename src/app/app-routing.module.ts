@@ -15,34 +15,17 @@ const routes: Routes = [
     component: ContentLayoutComponent,
     children: [
       {
-        path: 'dashboard-test',
-        loadChildren: () =>
-          import('./modules/home/home.module').then(m => m.HomeModule)
-      },
-      {
-        path: 'customers-test',
+        path: 'customers',
         loadChildren: () =>
         import('./modules/customers/customer.module').then(m => m.CustomerModule)
       },
       {
-        path: 'customers-test/contact-test',
+        path: 'customers/add',
         loadChildren: () =>
         import('./modules/add-forms/add-forms.module').then(m => m.AddFormModule)
       },
     ]
   },
-  {
-    path: '',
-    component: CustomerLayoutComponent,
-    children: [
-      {
-        path: 'customers-test1',
-        loadChildren: () =>
-          import('./modules/customers/customer.module').then(m => m.CustomerModule)
-      },
-    ]
-  },
-
   {
     path: 'auth',
     component: AuthLayoutComponent,
@@ -50,7 +33,7 @@ const routes: Routes = [
       import('./modules/auth/auth.module').then(m => m.AuthModule)
   },
   // Fallback when no prior routes is matched
-   { path: '**', redirectTo: '/home', pathMatch: 'full' },
+   { path: '**', redirectTo: '/customers', pathMatch: 'full' },
 ];
 
 

@@ -5,11 +5,6 @@ import { AddFormCustomerComponent } from './add-form-customer/add-form-customer.
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
     component: AddFormCustomerComponent
   }
 ];
