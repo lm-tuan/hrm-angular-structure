@@ -5,11 +5,6 @@ import { ContentLayoutComponent } from './layout/content-layout/content-layout.c
 import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: '/home',
-  //   pathMatch: 'full'
-  // },
   {
     path: '',
     component: ContentLayoutComponent,

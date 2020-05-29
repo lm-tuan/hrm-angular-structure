@@ -1,39 +1,110 @@
 <mat-card>
-    <div class="login-page">
-        <div class="content">
-            <form class="login-form" fxFlex  >
-                <div class="text-center">
-                    <h2 class="app-name">Insert Customer</h2>
-                </div>
-                <div fxFlex  fxlayout="row" fxlayout.lt-md="column">
-                    <div fxFlexFill>
-                        <mat-form-field class="w-100">
-                            <input matInput placeholder="Username" >
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
-                    <div fxFlexFill>
-                        <mat-form-field class="w-100">
-                            <input matInput type="password" placeholder="Password"  >
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div fxFlex  fxLayout="row" fxLayout.lt-md="column" style="margin: 20px 0 30px 0">
-                    <div fxFlex>
-                        <mat-checkbox color="primary">Remember Me</mat-checkbox>
-                    </div>
-                    <div fxFlex  fxLayoutAlign="end">
-                        <a routerLink="/forget-password">Forget Password</a>
-                    </div>
-                </div>
-                <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
-                    <div fxFlexFill>
-                        <button type="submit" mat-raised-button color="primary" class="w-100" >Submit</button>
-                    </div>
-                </div>
-      
-            </form>
+  <div class="login-page">
+    <div class="content">
+      <form class="login-form" fxFlex>
+        <div class="text-center">
+          <h2 class="app-name">Thêm nhân viên </h2>
         </div>
-      </div>
+        <div fxFlex fxlayout="row" fxlayout.lt-md="column">
+          <div fxFlexFill>
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Họ và tên" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+          <div fxFlexFill>
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Địa chỉ" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlexFill>
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Email" />
+              </mat-form-field>
+            </div>
+          </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlexFill>
+              <mat-form-field class="w-100">
+                <input type="number" matInput placeholder="Số điện thoại" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlexFill>
+              <mat-form-field class="w-100">
+                <input matInput  [matDatepicker]="picker"  placeholder="Ngày bắt đầu" />
+                <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+          <div fxFlexFill>
+            <mat-form-field>
+              <mat-label>Ngày sinh</mat-label>
+              <input matInput [matDatepicker]="picker1" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="custom-gender">
+              <mat-label>Giới tính</mat-label>
+              <mat-select>
+                <mat-option>
+                  Nữ
+                </mat-option>
+                <mat-option>
+                  Nam
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlexFill>
+              <mat-form-field style="width: 100%;">
+              <mat-label>Bộ phận</mat-label>
+              <mat-select>
+                <mat-option>
+                  EMS
+                </mat-option>
+                <mat-option>
+                  BPO
+                </mat-option>
+                <mat-option>
+                  BAP
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+          </div>
+
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+          <div fxFlexFill>
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              class="w-100"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </mat-card>
