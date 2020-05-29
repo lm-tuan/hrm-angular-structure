@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/service/token-storage.service';
 import { AuthService } from 'src/app/core/service/authService';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private tokenStorage: TokenStorageService,
     private authService: AuthService,
+    private router: Router,
    // private location: Location
 
   ) {
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         console.log('step finnal');
+        this.router.navigate(['customers-test']);
         // window.location.reload();
       },
       err => {
