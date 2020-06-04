@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const baseUrl = 'http://localhost:8080/api/admin/users';
+const baseUrl = 'http://localhost:8080/api/profile';
 
 @Injectable({ providedIn: 'root'})
 export class UserService {
 
-  constructor(private http: HttpClient){ 
+  constructor(private http: HttpClient){
   }
 
   getAll() {

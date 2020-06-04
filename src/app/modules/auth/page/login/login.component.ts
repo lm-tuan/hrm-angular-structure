@@ -29,28 +29,28 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     // Check on brower have token
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-      this.router.navigate(['customers-test']);
-    }
+    // if (this.tokenStorage.getToken()) {
+    //   this.isLoggedIn = true;
+    //   this.roles = this.tokenStorage.getUser().roles;
+    //   this.router.navigate(['customers-test']);
+    // }
   }
 
   login() {
-    this.authService.login(this.loginForm.value)
-      .subscribe(data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
-        this.router.navigate(['customers-test']);
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      }
-      );
+    // this.authService.login(this.loginForm.value)
+    //   .subscribe(data => {
+    //     this.tokenStorage.saveToken(data.accessToken);
+    //     this.tokenStorage.saveUser(data);
+    //     this.isLoginFailed = false;
+    //     this.isLoggedIn = true;
+    //     this.roles = this.tokenStorage.getUser().roles;
+    //     this.router.navigate(['customers-test']);
+    //   },
+    //   err => {
+    //     this.errorMessage = err.error.message;
+    //     this.isLoginFailed = true;
+    //   }
+    //   );
   }
 
   get f() {
@@ -58,10 +58,10 @@ export class LoginComponent implements OnInit {
   }
 
   private buildForm(): void {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+    // this.loginForm = this.formBuilder.group({
+    //   username: ['', Validators.required],
+    //   password: ['', Validators.required]
+    // });
   }
 
 }
