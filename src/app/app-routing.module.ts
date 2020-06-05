@@ -19,6 +19,11 @@ const routes: Routes = [
         loadChildren: () =>
         import('./modules/add-forms/add-forms.module').then(m => m.AddFormModule)
       },
+      {
+        path: 'customers/detail',
+        loadChildren: () =>
+        import('./modules/detail/detail.module').then(m => m.DetailUserModule)
+      },
     ]
   },
   {

@@ -22,6 +22,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [],
   imports: [
@@ -46,7 +48,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatNativeDateModule,
     MatTableModule,
     CdkTableModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatGridListModule,
+    FlexLayoutModule
   ],
   exports: [
     MatButtonModule,
@@ -70,7 +74,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatNativeDateModule,
     MatTableModule,
     CdkTableModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatGridListModule,
+    FlexLayoutModule
+
   ]
 })
 export class MaterialModule {}
