@@ -18,7 +18,7 @@ export class UserService {
   }
 
   create(data) {
-    return this.http.post(baseUrl, data);
+    return this.http.post(`${baseUrl}/create`, data);
   }
 
   update(id, data) {

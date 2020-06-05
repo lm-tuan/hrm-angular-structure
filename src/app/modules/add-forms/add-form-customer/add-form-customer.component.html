@@ -1,35 +1,43 @@
-<mat-card>
+<mat-card class="mat-card-custom">
+  <mat-spinner class="progress-custom" *ngIf="isLoading" ></mat-spinner>
   <div class="login-page">
     <div class="content">
-      <form class="login-form" fxFlex>
+      <form class="login-form" fxFlex (ngSubmit)="add()" [formGroup]="loginForm">
         <div class="text-center">
-          <h2 class="app-name">Thêm nhân viên </h2>
+          <!-- <h2 class="app-name">Thêm nhân viên </h2> -->
         </div>
         <div fxFlex fxlayout="row" fxlayout.lt-md="column">
           <div fxFlexFill>
             <mat-form-field class="w-100">
-              <input matInput placeholder="Họ và tên" />
+              <input matInput placeholder="Họ và tên" formControlName="fullName" />
             </mat-form-field>
           </div>
         </div>
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
           <div fxFlexFill>
             <mat-form-field class="w-100">
-              <input matInput placeholder="Địa chỉ" />
+              <input matInput placeholder="Địa chỉ" formControlName="address" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+          <div fxFlexFill>
+            <mat-form-field class="w-100">
+              <input type="number" matInput placeholder="Mã nhân viên" formControlName="idCard" />
             </mat-form-field>
           </div>
         </div>
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div fxFlexFill>
               <mat-form-field class="w-100">
-                <input matInput placeholder="Email" />
+                <input type="email" matInput placeholder="Email" formControlName="email" />
               </mat-form-field>
             </div>
           </div>
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div fxFlexFill>
               <mat-form-field class="w-100">
-                <input type="number" matInput placeholder="Số điện thoại" />
+                <input type="number" matInput placeholder="Số điện thoại" formControlName="phone" />
               </mat-form-field>
             </div>
           </div>
@@ -37,7 +45,7 @@
           <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div fxFlexFill>
               <mat-form-field class="w-100">
-                <input matInput  [matDatepicker]="picker"  placeholder="Ngày bắt đầu" />
+                <input matInput  [matDatepicker]="picker"  placeholder="Ngày bắt đầu" formControlName="startDate" />
                 <mat-datepicker-toggle
                 matSuffix
                 [for]="picker"
@@ -51,7 +59,7 @@
           <div fxFlexFill>
             <mat-form-field>
               <mat-label>Ngày sinh</mat-label>
-              <input matInput [matDatepicker]="picker1" />
+              <input matInput [matDatepicker]="picker1" formControlName="birthday" />
               <mat-datepicker-toggle
                 matSuffix
                 [for]="picker1"
@@ -61,11 +69,11 @@
 
             <mat-form-field class="custom-gender">
               <mat-label>Giới tính</mat-label>
-              <mat-select>
-                <mat-option>
+              <mat-select formControlName="gender">
+                <mat-option value=0>
                   Nữ
                 </mat-option>
-                <mat-option>
+                <mat-option value=1>
                   Nam
                 </mat-option>
               </mat-select>
@@ -77,15 +85,15 @@
             <div fxFlexFill>
               <mat-form-field style="width: 100%;">
               <mat-label>Bộ phận</mat-label>
-              <mat-select>
-                <mat-option>
-                  EMS
+              <mat-select formControlName="position">
+                <mat-option value="DEV">
+                  DEV
                 </mat-option>
-                <mat-option>
+                <mat-option value="BPO">
                   BPO
                 </mat-option>
-                <mat-option>
-                  BAP
+                <mat-option value="GA">
+                  GA
                 </mat-option>
               </mat-select>
             </mat-form-field>
