@@ -52,7 +52,7 @@ export class AddFormCustomerComponent implements OnInit {
     this.isLoading = true;
     setTimeout(() => {
       this.userService.create(profile).subscribe(() => {
-        this.router.navigate(['customers-test']);
+        this.router.navigate(['customers']);
       });
     } , 2000);
   }

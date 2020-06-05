@@ -53,6 +53,18 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Bộ phận </th>
               <td mat-cell *matCellDef="let element"> {{element.position}} </td>
             </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="Detail">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Xem chi tiết </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <div class="example-button-container">
+                    <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
+                      <mat-icon (click) = "onLinkDetail(element.id)">description</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
             
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -15,14 +15,14 @@ const routes: Routes = [
         import('./modules/customers/customer.module').then(m => m.CustomerModule)
       },
       {
+        path: 'customers/detail/:id',
+        loadChildren: () =>
+        import('./modules/detail/detail.module').then(m => m.DetailUserModule)
+      },
+      {
         path: 'customers/add',
         loadChildren: () =>
         import('./modules/add-forms/add-forms.module').then(m => m.AddFormModule)
-      },
-      {
-        path: 'customers/detail',
-        loadChildren: () =>
-        import('./modules/detail/detail.module').then(m => m.DetailUserModule)
       },
     ]
   },
