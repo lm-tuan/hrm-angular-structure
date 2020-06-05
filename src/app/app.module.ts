@@ -13,14 +13,16 @@ import { SharedModule } from './shared/shared.module';
 import { TutorialService } from './core/service/tutorialService';
 import { HttpClientModule } from '@angular/common/http';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
-import { HomeModule } from './modules/home/home.module';
 import { NavComponent } from './layout/nav/nav.component';
 import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
 import { CustomerModule } from './modules/customers/customer.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ContactComponent } from './modules/contact/contact.component';
-import { ContactModule } from './modules/contact/contact.module';
-
+import { AuthService } from './core/service/authService';
+import { TokenStorageService } from './core/service/token-storage.service';
+import {Location } from '@angular/common';
+import { UserService } from './core/service/user.service';
+import { authInterceptorProviders } from './core/interceptor/auth.interceptor';
+import { AddFormModule } from './modules/add-forms/add-forms.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,15 +36,14 @@ import { ContactModule } from './modules/contact/contact.module';
     ReactiveFormsModule,
     BrowserModule,
     AuthModule,
-    HomeModule,
     CustomerModule,
-    ContactModule,
+    AddFormModule,
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [TutorialService],
+  providers: [AuthService, TokenStorageService, UserService, authInterceptorProviders  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
