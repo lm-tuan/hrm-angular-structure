@@ -18,6 +18,7 @@
             padding: 40px;
             background: #fff;
             width: 500px;
+            flex-direction: column;
             box-shadow: 0 0 10px #ddd;
             input:-webkit-autofill {
                 -webkit-box-shadow: 0 0 0 30px white inset;
@@ -51,7 +52,8 @@
     width: 100%;
 }
 .custom-gender {
-    margin-left: 23%;
+    // margin-left: 20%;
+    margin-left: 9%;
 }
 
 .progress-custom{

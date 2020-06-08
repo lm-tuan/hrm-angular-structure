@@ -23,6 +23,7 @@ import {Location } from '@angular/common';
 import { UserService } from './core/service/user.service';
 import { authInterceptorProviders } from './core/interceptor/auth.interceptor';
 import { AddFormModule } from './modules/add-forms/add-forms.module';
+import { EditFormModule } from './modules/edit-forms/edit-forms.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { AddFormModule } from './modules/add-forms/add-forms.module';
     AuthModule,
     CustomerModule,
     AddFormModule,
+    EditFormModule,
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
