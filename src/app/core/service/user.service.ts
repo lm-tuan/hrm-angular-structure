@@ -26,6 +26,6 @@ export class UserService {
   }
 
   delete(id) {
-    return this.http.delete(`${baseUrl}/${id}`);
+    return this.http.delete(`${baseUrl}/delete/${id}`);
   }
 }
