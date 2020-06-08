@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
+import { EditUserComponent } from './modules/edit-forms/edit-user/edit-user.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
         path: 'customers/add',
         loadChildren: () =>
         import('./modules/add-forms/add-forms.module').then(m => m.AddFormModule)
+      },
+      {
+        path: 'customers/edit/:id',
+        loadChildren: () =>
+        import('./modules/edit-forms/edit-forms.module').then(m => m.EditFormModule)
       },
     ]
   },

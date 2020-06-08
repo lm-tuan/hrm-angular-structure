@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/service/user.service';
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 
 @Component({
   selector: 'app-detail-user',
@@ -12,6 +12,7 @@ export class DetailUserComponent implements OnInit {
   user: any;
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService,
   ) { }
 
@@ -20,5 +21,12 @@ export class DetailUserComponent implements OnInit {
     this.userService.get(data.params.id).subscribe(user => this.user = user);
   }
 
+  redirectToEdit(id){
+    this.router.navigate(['customers/edit/', id]);
+  }
+
+  redirectToHome(){
+    this.router.navigate(['customers']);
+  }
 
 }

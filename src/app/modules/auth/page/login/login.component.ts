@@ -37,6 +37,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    // test
+    // console.log(this.loginForm.value);
+     this.router.navigate(['customers']);
     // this.authService.login(this.loginForm.value)
     //   .subscribe(data => {
     //     this.tokenStorage.saveToken(data.accessToken);
@@ -58,10 +61,10 @@ export class LoginComponent implements OnInit {
   }
 
   private buildForm(): void {
-    // this.loginForm = this.formBuilder.group({
-    //   username: ['', Validators.required],
-    //   password: ['', Validators.required]
-    // });
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
 }

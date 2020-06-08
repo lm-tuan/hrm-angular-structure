@@ -17,6 +17,7 @@
         .login-form {
             padding: 40px;
             background: #fff;
+            flex-direction: column;
             width: 500px;
             box-shadow: 0 0 10px #ddd;
             input:-webkit-autofill {
