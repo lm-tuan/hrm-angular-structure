@@ -1,4 +1,5 @@
 <div fxLayout="column" class="fxLayout-custom">
+    <mat-spinner class="progress-custom" *ngIf="isLoading" ></mat-spinner>
     <mat-list>
         <mat-list-item>
             Profile
@@ -91,7 +92,7 @@
                               </div>
                               <div class="example-button-container">
                                 <button color="warn" mat-mini-fab  aria-label="Example icon button with a plus one icon">
-                                  <mat-icon>delete</mat-icon>
+                                  <mat-icon (click) = "removeUser(user.id)">delete</mat-icon>
                                 </button>
                               </div>
                               <div class="example-button-container">
