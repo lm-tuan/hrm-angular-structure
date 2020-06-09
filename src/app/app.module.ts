@@ -24,6 +24,7 @@ import { UserService } from './core/service/user.service';
 import { authInterceptorProviders } from './core/interceptor/auth.interceptor';
 import { AddFormModule } from './modules/add-forms/add-forms.module';
 import { EditFormModule } from './modules/edit-forms/edit-forms.module';
+import { SkillsModule } from './modules/skill/skill-list/skill-list.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { EditFormModule } from './modules/edit-forms/edit-forms.module';
     AddFormModule,
     EditFormModule,
     SharedModule,
+    SkillsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule

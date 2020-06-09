@@ -66,17 +66,6 @@
 
         <a
           mat-list-item
-          [routerLink]="['/dashboard-test']"
-          routerLinkActive="active"
-        >
-          <mat-icon mat-list-icon>
-            dashboard
-          </mat-icon>
-          <p mat-line>Dashboard</p>
-        </a>
-
-        <a
-          mat-list-item
           [routerLink]="['/customers']"
           routerLinkActive="active"
         >
@@ -85,6 +74,17 @@
           </mat-icon>
           <p mat-line>Customers</p>
         </a>
+        <a
+        mat-list-item
+        [routerLink]="['/skills']"
+        routerLinkActive="active"
+      >
+        <mat-icon mat-list-icon>
+          dashboard
+        </mat-icon>
+        <p mat-line>Skill</p>
+      </a>
+
         <a mat-list-item [routerLink]="['/users']" routerLinkActive="active">
           <mat-icon mat-list-icon>
             people

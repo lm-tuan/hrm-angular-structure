@@ -30,6 +30,11 @@ const routes: Routes = [
         loadChildren: () =>
         import('./modules/edit-forms/edit-forms.module').then(m => m.EditFormModule)
       },
+      {
+        path: 'skills',
+        loadChildren: () =>
+        import('./modules/skill/skill-list/skill-list.module').then(m => m.SkillsModule)
+      },
     ]
   },
   {
