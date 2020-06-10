@@ -24,6 +24,8 @@ export class CustomerListComponent implements OnInit {
   }
 
   onLinkDetail(id){
+    console.log('id', id);
+    
     this.router.navigate(['customers/detail/', id]);
   }
 
