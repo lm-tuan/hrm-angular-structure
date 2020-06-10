@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/core/service/user.service';
 
 @Component({
   selector: 'app-add-skill',
@@ -8,15 +10,33 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddSkillComponent implements OnInit {
   myForm: FormGroup;
-
+  skills = 0;
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     this.createForm();
-    this.addSkill('', 1, 0);
+    this.fetchDataById();
 
+  }
+
+  fetchDataById(){
+    const id = this.route.snapshot.params.id;
+    this.userService.get(id).subscribe((data: any) => {
+      console.log(data);
+      if(data.profileSkill.length === 0){
+        this.addSkill('', 1, 0);
+      }else {
+        this.skills = data.profileSkill.length;
+        data.profileSkill.forEach(item => {
+          this.addSkill(item.skill.name, item.level.name, 0);
+        });
+      }
+      
+    })
   }
 
   get skillForms() {

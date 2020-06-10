@@ -59,14 +59,26 @@
             
                         <button
                         mat-mini-fab
-                        color="primary"
+                        color="warn"
                         aria-label="Example icon button with a menu icon"
-                        (click)="addSkill()"
+                        (click)="deleteSkill(i)"
+                        *ngIf="i!=0"
                       >
                         <mat-icon >
-                            add
+                            delete
                       </mat-icon>
                       </button>
+                      <button
+                      mat-mini-fab
+                      color="primary"
+                      aria-label="Example icon button with a menu icon"
+                      (click)="addSkill()"
+                      *ngIf="i==0"
+                    >
+                      <mat-icon >
+                          add
+                    </mat-icon>
+                    </button>
             
                     </div>
             
