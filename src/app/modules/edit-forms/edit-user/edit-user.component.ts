@@ -67,19 +67,18 @@ export class EditUserComponent implements OnInit {
         setTimeout(() => {
           this.router.navigate(['customers/detail/', id]);
         }, 1000);
-       }
+      }
     });
   }
 
 
-  fetchDataById(){
+  fetchDataById() {
     const id = this.route.snapshot.params.id;
     this.userService.get(id).subscribe((data: any) => {
-      console.log(data);
       this.skill = data;
-      if(data.profileSkill.length === 0){
+      if (data.profileSkill.length === 0) {
         this.addSkill('', 1, 0);
-      }else {
+      } else {
         // this.skills = data.profileSkill.length;
         data.profileSkill.forEach(item => {
           this.addSkill(item.skill.name, item.level.name, 0);

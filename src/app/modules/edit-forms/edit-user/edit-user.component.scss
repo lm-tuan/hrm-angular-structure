@@ -25,6 +25,7 @@
           }
       }
   }
+  
 
   &:after {
       content: '';
@@ -127,4 +128,7 @@ margin-top: 10px;
 }
 .custom-mr{
   margin-top: 65px;
+}
+.mat-card .mat-focus-indicator .mat-card-custom{
+  box-shadow:none;
 }
