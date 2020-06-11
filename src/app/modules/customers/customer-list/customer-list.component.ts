@@ -29,4 +29,10 @@ export class CustomerListComponent implements OnInit {
     this.router.navigate(['customers/detail/', id]);
   }
 
+  onLinkEdit(id){
+    console.log('id', id);
+    
+    this.router.navigate(['customers/edit/', id]);
+  }
+
 }

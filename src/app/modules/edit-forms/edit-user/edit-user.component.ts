@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/core/service/user.service';
 import * as moment from 'moment';
@@ -12,7 +12,9 @@ import * as moment from 'moment';
 export class EditUserComponent implements OnInit {
   id: number;
   editForm: FormGroup;
+  editSkillForm: FormGroup;
   user: any;
+  skill: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -23,6 +25,8 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.createForm();
+    this.fetchDataById();
   }
   private buildForm(): void {
     const id = this.route.snapshot.params.id;
@@ -42,6 +46,7 @@ export class EditUserComponent implements OnInit {
     });
   }
   edit() {
+    console.log('submit', this.editSkillForm.value);
     const { fullName, address, idCard, email, phone, birthday, gender, position } = this.editForm.value;
     const profile = {
       fullName,
@@ -58,10 +63,58 @@ export class EditUserComponent implements OnInit {
 
     this.userService.update(id, profile).subscribe(data => {
       if (data) {
+
         setTimeout(() => {
           this.router.navigate(['customers/detail/', id]);
         }, 1000);
        }
     });
+  }
+
+
+  fetchDataById(){
+    const id = this.route.snapshot.params.id;
+    this.userService.get(id).subscribe((data: any) => {
+      console.log(data);
+      this.skill = data;
+      if(data.profileSkill.length === 0){
+        this.addSkill('', 1, 0);
+      }else {
+        // this.skills = data.profileSkill.length;
+        data.profileSkill.forEach(item => {
+          this.addSkill(item.skill.name, item.level.name, 0);
+        });
+      }
+    })
+  }
+
+  get skillForms() {
+    return this.editSkillForm.get('skills') as FormArray;
+
+  }
+
+  addSkill(skillId = '', levelId = 1, empskillId = 0) {
+    const skill = this.formBuilder.group({
+      skill: [skillId],
+      level: [levelId],
+      empskill: [empskillId]
+    });
+
+    this.skillForms.push(skill);
+  }
+
+  deleteSkill(i) {
+    this.skillForms.removeAt(i);
+  }
+
+  createForm() {
+    this.editSkillForm = this.formBuilder.group({
+      skills: this.formBuilder.array([])
+    });
+  }
+
+  onSubmit() {
+    console.log('submit', this.editSkillForm.value);
+
   }
 }
