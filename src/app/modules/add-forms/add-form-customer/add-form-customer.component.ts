@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { UserService } from 'src/app/core/service/user.service';
@@ -25,16 +25,19 @@ export class AddFormCustomerComponent implements OnInit {
 
   private buildForm(): void {
     this.loginForm = this.formBuilder.group({
-      fullName: ['', Validators.required],
+      fullName: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(5)]),
       address: ['', Validators.required],
-      idCard: ['', Validators.required],
-      email: ['', Validators.required],
+      idCard: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       phone: ['', Validators.required],
       startDate: ['', Validators.required],
       birthday: ['', Validators.required],
       gender: ['', Validators.required],
       position: ['', Validators.required]
     });
+  }
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.loginForm.controls[controlName].hasError(errorName);
   }
   add() {
 
@@ -57,3 +60,4 @@ export class AddFormCustomerComponent implements OnInit {
     } , 2000);
   }
 }
+

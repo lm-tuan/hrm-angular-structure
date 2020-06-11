@@ -2,7 +2,7 @@
   <mat-spinner class="progress-custom" *ngIf="isLoading" ></mat-spinner>
   <div class="login-page">
     <div class="content">
-      <form class="login-form" fxFlex (ngSubmit)="add()" [formGroup]="loginForm">
+      <form class="login-form" fxFlex novalidate (ngSubmit)="add()" [formGroup]="loginForm">
         <div class="text-center">
           <!-- <h2 class="app-name">Thêm nhân viên </h2> -->
         </div>
@@ -10,6 +10,10 @@
           <div fxFlexFill>
             <mat-form-field class="w-100">
               <input matInput placeholder="Họ và tên" formControlName="fullName" />
+              <!-- <mat-hint>Not more then 20 characters long.</mat-hint> -->
+              <mat-error *ngIf="hasError('fullName', 'required')">fullName is required</mat-error>
+              <mat-error *ngIf="hasError('fullName', 'maxlength')">You have more than 5 characters</mat-error>
+              <mat-error *ngIf="hasError('fullName', 'minlength')">You have more than 5 characters</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -107,8 +111,9 @@
               mat-raised-button
               color="primary"
               class="w-100"
+              [disabled]="!loginForm.valid"
             >
-              Update
+              Submit
             </button>
           </div>
         </div>
