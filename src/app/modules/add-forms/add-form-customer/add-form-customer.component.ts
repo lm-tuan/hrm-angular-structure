@@ -3,68 +3,17 @@ import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@ang
 import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { UserService } from 'src/app/core/service/user.service';
-
+import { promise } from 'protractor';
+import { SkillService } from 'src/app/core/service/skillService';
+import { zip } from 'rxjs';
 @Component({
   selector: 'app-add-form-customer',
   templateUrl: './add-form-customer.component.html',
   styleUrls: ['./add-form-customer.component.scss']
 })
 export class AddFormCustomerComponent implements OnInit {
-  // id: number;
-  // editForm: FormGroup;
-  // editSkillForm: FormGroup;
-  // user: any;
-  // skill: any;
-  // constructor(
-  //   private formBuilder: FormBuilder,
-  //   private router: Router,
-  //   private userService: UserService,
-  // ) {
-  //   this.buildForm();
-  // }
-
-  // ngOnInit(): void {
-  // }
-
-  // private buildForm(): void {
-  //   this.loginForm = this.formBuilder.group({
-  //     fullName: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(5)]),
-  //     address: ['', Validators.required],
-  //     idCard: new FormControl('', [Validators.required]),
-  //     email: new FormControl('', [Validators.required, Validators.email]),
-  //     phone: ['', Validators.required],
-  //     startDate: ['', Validators.required],
-  //     birthday: ['', Validators.required],
-  //     gender: ['', Validators.required],
-  //     position: ['', Validators.required]
-  //   });
-  // }
-  // public hasError = (controlName: string, errorName: string) =>{
-  //   return this.loginForm.controls[controlName].hasError(errorName);
-  // }
-  // add() {
-
-  //   const { fullName, address, idCard, email, phone, birthday, gender, position } = this.loginForm.value;
-  //   const profile = {
-  //     fullName,
-  //     address,
-  //     idCard,
-  //     email,
-  //     phone,
-  //     gender,
-  //     position,
-  //     birthday: moment(birthday).format('YYYY-MM-DD')
-  //   };
-  //   this.isLoading = true;
-  //   setTimeout(() => {
-  //     this.userService.create(profile).subscribe(() => {
-  //       this.router.navigate(['customers']);
-  //     });
-  //   } , 2000);
-  // }
-  id: number;
-  editForm: FormGroup;
-  editSkillForm: FormGroup;
+  addForm: FormGroup;
+  addSkillForm: FormGroup;
   user: any;
   skill: any;
   constructor(
@@ -72,16 +21,17 @@ export class AddFormCustomerComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
+    private skillService: SkillService,
   ) {
     this.buildForm();
   }
 
   ngOnInit(): void {
     this.createForm();
-    this.fetchDataById();
+    this.addSkill('', 1, 0);
   }
   private buildForm(): void {
-    this.editForm = this.formBuilder.group({
+    this.addForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       address: ['', Validators.required],
       idCard: ['', Validators.required],
@@ -93,52 +43,43 @@ export class AddFormCustomerComponent implements OnInit {
       position: ['', Validators.required]
     });
   }
-  edit() {
-    console.log('submit2', this.editSkillForm.value, );
-    console.log('submit3', this.editForm.value,  );
-    // const { fullName, address, idCard, email, phone, birthday, gender, position } = this.editForm.value;
-    // const profile = {
-    //   fullName,
-    //   // address,
-    //   idCard,
-    //   email,
-    //   phone,
-    //   gender: Number(gender),
-    //   position,
-    //   birthday: moment(birthday).format('YYYY-MM-DD')
-    // };
-    // const id = this.route.snapshot.params.id;
-    // console.log('profile', profile);
+  add() {
+    console.log('submit2', this.addSkillForm.value, );
+    console.log('submit3', this.addForm.value,  );
+    // Data form profile
+    const { fullName, address, idCard, email, phone, birthday, gender, position } = this.addForm.value;
+    const profile = {
+      fullName,
+      // address,
+      idCard,
+      email,
+      phone,
+      gender: Number(gender),
+      position,
+      birthday: moment(birthday).format('YYYY-MM-DD')
+    };
 
-    // this.userService.update(id, profile).subscribe(data => {
-    //   if (data) {
+    // Data form skill
+    const skillName = this.addSkillForm.value.skills[0].skill;
+    const skill = {
+      skill: skillName
+    };
+    zip(
+      this.userService.create(profile),
+      this.skillService.create(skill)
+    ).subscribe(data => {
+      console.log('data', data);
+      if (data) {
+        this.router.navigate(['customers']);
+      }
+  }, erorr => {
+    console.log('err', erorr);
+  });
 
-    //     setTimeout(() => {
-    //       this.router.navigate(['customers/detail/', id]);
-    //     }, 1000);
-    //   }
-    // });
-  }
-
-
-  fetchDataById() {
-    this.addSkill('', 1, 0);
-    // const id = this.route.snapshot.params.id;
-    // this.userService.get(id).subscribe((data: any) => {
-    //   this.skill = data;
-    //   if (data.profileSkill.length === 0) {
-    //     this.addSkill('', 1, 0);
-    //   } else {
-    //     // this.skills = data.profileSkill.length;
-    //     data.profileSkill.forEach(item => {
-    //       this.addSkill(item.skill.name, item.level.name, 0);
-    //     });
-    //   }
-    // })
   }
 
   get skillForms() {
-    return this.editSkillForm.get('skills') as FormArray;
+    return this.addSkillForm.get('skills') as FormArray;
 
   }
 
@@ -157,14 +98,10 @@ export class AddFormCustomerComponent implements OnInit {
   }
 
   createForm() {
-    this.editSkillForm = this.formBuilder.group({
+    this.addSkillForm = this.formBuilder.group({
       skills: this.formBuilder.array([])
     });
   }
 
-  onSubmit() {
-    // console.log('submit1', this.editSkillForm.value);
-
-  }
 }
 
