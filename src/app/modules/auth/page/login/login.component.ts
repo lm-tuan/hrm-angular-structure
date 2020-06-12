@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private authService: AuthService,
     private router: Router,
-   // private location: Location
+    // private location: Location
 
   ) {
     this.buildForm();
@@ -29,17 +29,28 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     // Check on brower have token
-    // if (this.tokenStorage.getToken()) {
-    //   this.isLoggedIn = true;
-    //   this.roles = this.tokenStorage.getUser().roles;
-    //   this.router.navigate(['customers-test']);
-    // }
+    if (localStorage.getItem('access_token')) {
+      console.log('toàng');
+      this.isLoggedIn = true;
+      this.router.navigate(['employee']);
+    }
   }
 
   login() {
+    const IUSER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+    const USERNAME = 'admin';
+    const PASSWORD = 'admin';
+    this.authService.get().subscribe((data: any) => {
+      if (data.username === USERNAME && data.password === PASSWORD){
+        const userStore = {userid: IUSER };
+        localStorage.setItem('access_token', JSON.stringify(userStore));
+        this.router.navigate(['employee']);
+      }
+      return;
+    });
     // test
     // console.log(this.loginForm.value);
-     this.router.navigate(['employee']);
+    // this.router.navigate(['employee']);
     // this.authService.login(this.loginForm.value)
     //   .subscribe(data => {
     //     this.tokenStorage.saveToken(data.accessToken);

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+// TEST
+const AUTH_API = 'http://192.168.4.201:8080/api/user/1';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,4 +30,7 @@ export class AuthService {
 //       password: user.password
 //     }, httpOptions);
 //   }
+  get() {
+    return this.http.get(`${AUTH_API}`);
+  }
 }
