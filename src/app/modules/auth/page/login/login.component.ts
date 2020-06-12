@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   login() {
     // test
     // console.log(this.loginForm.value);
-     this.router.navigate(['customers']);
+     this.router.navigate(['employee']);
     // this.authService.login(this.loginForm.value)
     //   .subscribe(data => {
     //     this.tokenStorage.saveToken(data.accessToken);

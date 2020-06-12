@@ -85,7 +85,7 @@ export class EditUserComponent implements OnInit {
             skill_id: s.skill_id
           };
           this.profileSkillService.create(ps).subscribe(p => {
-            this.router.navigate(['customers']);
+            this.router.navigate(['employee']);
           });
 
         });
@@ -94,7 +94,7 @@ export class EditUserComponent implements OnInit {
         // update skill
         // update profileSkill
         this.skillService.update(data.profileSkill[0].skill.skill_id, skill).subscribe(ups => {
-          this.router.navigate(['customers']);
+          this.router.navigate(['employee']);
         })
       }
     });

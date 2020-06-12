@@ -27,7 +27,7 @@ export class DetailUserComponent implements OnInit {
       if (err) {
         console.log('err', err);
         if (err.status === 404) {
-          this.router.navigate(['customers']);
+          this.router.navigate(['employee']);
         }
       }
       console.log('err', err);
@@ -36,11 +36,11 @@ export class DetailUserComponent implements OnInit {
   }
 
   redirectToEdit(id) {
-    this.router.navigate(['customers/edit/', id]);
+    this.router.navigate([`employee/edit/${id}`]);
   }
 
   redirectToHome() {
-    this.router.navigate(['customers']);
+    this.router.navigate(['employee']);
   }
   removeUser(id) {
     this.isLoading = true;
@@ -48,7 +48,7 @@ export class DetailUserComponent implements OnInit {
       this.userService.delete(id).subscribe((data: any) => {
         if(data.status === 200) {
           this.isLoading = false;
-          this.router.navigate(['customers']);
+          this.router.navigate(['employee']);
         }
       });
     }, 2000);

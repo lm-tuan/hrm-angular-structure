@@ -12,6 +12,11 @@
         Menu
       </h1>
     </a>
+    <a class="navbar-brand" [routerLink]="['/employee']" matTooltip="Home" style="margin-left: 10px;">
+      <h1>
+        Dashboard
+      </h1>
+    </a>
 
     <span class="navbar-spacer"></span>
 
@@ -66,7 +71,7 @@
 
         <a
           mat-list-item
-          [routerLink]="['/customers']"
+          [routerLink]="['/employee']"
           routerLinkActive="active"
         >
           <mat-icon mat-list-icon>
@@ -85,7 +90,7 @@
         <p mat-line>Skill</p>
       </a>
 
-        <a mat-list-item [routerLink]="['/users']" routerLinkActive="active">
+        <a mat-list-item  routerLinkActive="active">
           <mat-icon mat-list-icon>
             people
           </mat-icon>

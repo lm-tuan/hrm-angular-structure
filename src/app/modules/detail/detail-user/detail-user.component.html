@@ -1,6 +1,6 @@
 <div fxLayout="column" class="fxLayout-custom">
   <mat-spinner class="progress-custom" *ngIf="isLoading"></mat-spinner>
-  <mat-card>Customers / Profile</mat-card>
+  <mat-card>Employee / Profile</mat-card>
 
   <div class="mt-10" fxLayout="row" fxLayoutGap="20px" fxFlex>
     <mat-card class="example-card" fxFlex="20">
@@ -102,12 +102,12 @@
               <div class="example-flex-container">
                 <div class="example-button-container">
                     <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
-                      <mat-icon (click) = "redirectToEdit(user.id)" >edit</mat-icon>
+                      <mat-icon (click) = "redirectToEdit(user.profile_id)" >edit</mat-icon>
                     </button>
                   </div>
                   <div class="example-button-container">
                     <button color="warn" mat-mini-fab  aria-label="Example icon button with a plus one icon">
-                      <mat-icon (click) = "removeUser(user.id)">delete</mat-icon>
+                      <mat-icon (click) = "removeUser(user.profile_id)">delete</mat-icon>
                     </button>
                   </div>
                   <div class="example-button-container">

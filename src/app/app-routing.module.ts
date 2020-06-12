@@ -11,22 +11,22 @@ const routes: Routes = [
     component: ContentLayoutComponent,
     children: [
       {
-        path: 'customers',
+        path: 'employee',
         loadChildren: () =>
         import('./modules/customers/customer.module').then(m => m.CustomerModule)
       },
       {
-        path: 'customers/detail/:id',
+        path: 'employee/detail/:id',
         loadChildren: () =>
         import('./modules/detail/detail.module').then(m => m.DetailUserModule)
       },
       {
-        path: 'customers/add',
+        path: 'employee/add',
         loadChildren: () =>
         import('./modules/add-forms/add-forms.module').then(m => m.AddFormModule)
       },
       {
-        path: 'customers/edit/:id',
+        path: 'employee/edit/:id',
         loadChildren: () =>
         import('./modules/edit-forms/edit-forms.module').then(m => m.EditFormModule)
       },

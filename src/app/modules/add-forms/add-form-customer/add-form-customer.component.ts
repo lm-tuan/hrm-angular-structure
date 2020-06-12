@@ -84,7 +84,7 @@ export class AddFormCustomerComponent implements OnInit {
       };
       this.profileSkillService.create(ps).subscribe( sp => {
         if (sp) {
-          this.router.navigate(['customers']);
+          this.router.navigate(['employee']);
         }
       });
   }, erorr => {
