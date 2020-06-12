@@ -6,6 +6,8 @@ import { UserService } from 'src/app/core/service/user.service';
 import { promise } from 'protractor';
 import { SkillService } from 'src/app/core/service/skillService';
 import { zip } from 'rxjs';
+import { LevelSkillService } from 'src/app/core/service/LevelSkillService';
+import { ProfileSkillService } from 'src/app/core/service/ProfileSkillService';
 @Component({
   selector: 'app-add-form-customer',
   templateUrl: './add-form-customer.component.html',
@@ -16,12 +18,15 @@ export class AddFormCustomerComponent implements OnInit {
   addSkillForm: FormGroup;
   user: any;
   skill: any;
+  levels: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
     private skillService: SkillService,
+    private levelSkillService: LevelSkillService,
+    private profileSkillService: ProfileSkillService,
   ) {
     this.buildForm();
   }
@@ -29,6 +34,7 @@ export class AddFormCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.addSkill('', 1, 0);
+   
   }
   private buildForm(): void {
     this.addForm = this.formBuilder.group({
@@ -61,17 +67,27 @@ export class AddFormCustomerComponent implements OnInit {
 
     // Data form skill
     const skillName = this.addSkillForm.value.skills[0].skill;
+    const levelid = this.addSkillForm.value.skills[0].level;
+    console.log('skillName', skillName);
     const skill = {
-      skill: skillName
+      name: skillName
     };
     zip(
       this.userService.create(profile),
       this.skillService.create(skill)
-    ).subscribe(data => {
+    ).subscribe((data: any) => {
       console.log('data', data);
-      if (data) {
-        this.router.navigate(['customers']);
-      }
+      const ps = {
+        level_id: levelid,
+        profile_id: data[0].profile_id,
+        skill_id: data[1].skill_id
+      };
+      console.log('ps', ps);
+      this.profileSkillService.create(ps).subscribe( sp => {
+        if (sp) {
+          this.router.navigate(['customers']);
+        }
+      });
   }, erorr => {
     console.log('err', erorr);
   });

@@ -27,6 +27,8 @@ import { EditFormModule } from './modules/edit-forms/edit-forms.module';
 import { SkillsModule } from './modules/skill/skill-list/skill-list.module';
 import { SkillAddModule } from './modules/skill/skill-add/skill-add.module';
 import { SkillService } from './core/service/skillService';
+import { LevelSkillService } from './core/service/LevelSkillService';
+import { ProfileSkillService } from './core/service/ProfileSkillService';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +55,14 @@ import { SkillService } from './core/service/skillService';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService, TokenStorageService, UserService, SkillService, authInterceptorProviders  ],
+  providers: [AuthService,
+    TokenStorageService,
+    UserService,
+    SkillService,
+    LevelSkillService,
+    ProfileSkillService,
+    authInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
