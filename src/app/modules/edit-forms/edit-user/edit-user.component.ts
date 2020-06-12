@@ -93,6 +93,9 @@ export class EditUserComponent implements OnInit {
       }else {
         // update skill
         // update profileSkill
+        this.skillService.update(data.profileSkill[0].skill.skill_id, skill).subscribe(ups => {
+          this.router.navigate(['customers']);
+        })
       }
     });
   }

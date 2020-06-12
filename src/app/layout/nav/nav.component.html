@@ -72,7 +72,7 @@
           <mat-icon mat-list-icon>
             business
           </mat-icon>
-          <p mat-line>Customers</p>
+          <p mat-line>Employees</p>
         </a>
         <a
         mat-list-item
@@ -92,59 +92,13 @@
           <p mat-line>Users</p>
         </a>
 
-        <a mat-list-item [routerLink]="['/contact-test']">
-          <mat-icon mat-list-icon>person</mat-icon>
-          <p mat-line>Contact</p>
-        </a>
-
+        
         <a mat-list-item [routerLink]="['/auth/login']">
           <mat-icon mat-list-icon>exit_to_app</mat-icon>
           <p mat-line>Log out</p>
         </a>
 
         <mat-divider></mat-divider>
-
-        <h3 mat-subheader>Resources</h3>
-
-        <a mat-list-item [routerLink]="['/icons']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
-            toll
-          </mat-icon>
-          <p mat-line>Icons</p>
-        </a>
-        <a
-          mat-list-item
-          [routerLink]="['/typography']"
-          routerLinkActive="active"
-        >
-          <mat-icon mat-list-icon>
-            font_download
-          </mat-icon>
-          <p mat-line>Typography</p>
-        </a>
-
-        <a
-          mat-list-item
-          href=""
-          target="_blank"
-        >
-          <mat-icon mat-list-icon>
-            link
-          </mat-icon>
-          <p mat-line>Material Components</p>
-        </a>
-
-        <a
-          id="push-bottom"
-          mat-list-item
-          [routerLink]="['/about']"
-          routerLinkActive="active"
-        >
-          <mat-icon mat-list-icon>
-            info_outline
-          </mat-icon>
-          <p mat-line>About</p>
-        </a>
       </mat-nav-list>
     </mat-sidenav>
 
