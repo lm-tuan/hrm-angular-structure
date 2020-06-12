@@ -67,6 +67,7 @@ export class AddFormCustomerComponent implements OnInit {
     const skillName = this.addSkillForm.value.skills[0].skill;
     const levelid = this.addSkillForm.value.skills[0].level;
     console.log('skillName', skillName);
+    this.isLoading = true;
     const skill = {
       name: skillName
     };
@@ -80,11 +81,14 @@ export class AddFormCustomerComponent implements OnInit {
         profile_id: data[0].profile_id,
         skill_id: data[1].skill_id
       };
-      this.profileSkillService.create(ps).subscribe( sp => {
-        if (sp) {
-          this.router.navigate(['employee']);
-        }
-      });
+      setTimeout(() => {
+        this.profileSkillService.create(ps).subscribe( sp => {
+          if (sp) {
+            this.isLoading = false;
+            this.router.navigate(['employee']);
+          }
+        });
+      }, 2000);
   }, erorr => {
     console.log('err', erorr);
   });

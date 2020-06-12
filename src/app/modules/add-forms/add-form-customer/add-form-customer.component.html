@@ -1,5 +1,5 @@
 <div fxLayout="column" class="fxLayout-custom">
-  <mat-spinner class="progress-custom" *ngIf="isLoading"></mat-spinner>
+  <mat-spinner class="progress-custom" *ngIf="isLoading" ></mat-spinner>
   <mat-card>Employees / Thêm nhân viên</mat-card>
   <div class="mt-10" fxLayout="row" fxLayoutGap="20px" fxFlex>
     <mat-card class="example-card" fxFlex="50">
@@ -11,7 +11,6 @@
       </mat-list>
       <mat-card-content>
         <mat-card class="mat-card-custom" style="box-shadow: none;margin-top: 10px;">
-          <!-- <mat-spinner class="progress-custom" *ngIf="isLoading" ></mat-spinner> -->
           <div class="login-page">
             <div class="content">
               <form class="login-form" fxFlex (ngSubmit)="add()" [formGroup]="addForm">

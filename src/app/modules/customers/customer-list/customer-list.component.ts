@@ -44,8 +44,8 @@ export class CustomerListComponent implements OnInit {
     setTimeout(() => {
       this.userService.delete(id).subscribe(data => {
         console.log('data', data);
-        this.getAll();
         this.isLoading = false;
+        this.getAll();
       });
     },
     2000);
