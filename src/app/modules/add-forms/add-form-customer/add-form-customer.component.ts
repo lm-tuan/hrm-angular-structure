@@ -82,7 +82,6 @@ export class AddFormCustomerComponent implements OnInit {
         profile_id: data[0].profile_id,
         skill_id: data[1].skill_id
       };
-      console.log('ps', ps);
       this.profileSkillService.create(ps).subscribe( sp => {
         if (sp) {
           this.router.navigate(['customers']);

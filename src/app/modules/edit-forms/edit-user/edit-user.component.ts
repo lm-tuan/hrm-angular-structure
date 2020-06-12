@@ -3,6 +3,10 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/core/service/user.service';
 import * as moment from 'moment';
+import { SkillService } from 'src/app/core/service/skillService';
+import { LevelSkillService } from 'src/app/core/service/LevelSkillService';
+import { ProfileSkillService } from 'src/app/core/service/ProfileSkillService';
+import { zip } from 'rxjs';
 
 @Component({
   selector: 'app-edit-user',
@@ -20,6 +24,9 @@ export class EditUserComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
+    private skillService: SkillService,
+    private levelSkillService: LevelSkillService,
+    private profileSkillService: ProfileSkillService,
   ) {
     this.buildForm();
   }
@@ -47,7 +54,11 @@ export class EditUserComponent implements OnInit {
   }
   edit() {
     console.log('submit', this.editSkillForm.value);
+    console.log('submit', this.editForm.value);
     const { fullName, address, idCard, email, phone, birthday, gender, position } = this.editForm.value;
+    const skillName = this.editSkillForm.value.skills[0].skill;
+    const levelid = this.editSkillForm.value.skills[0].level;
+    const id = this.route.snapshot.params.id;
     const profile = {
       fullName,
       // address,
@@ -58,15 +69,30 @@ export class EditUserComponent implements OnInit {
       position,
       birthday: moment(birthday).format('YYYY-MM-DD')
     };
-    const id = this.route.snapshot.params.id;
-    console.log('profile', profile);
+    const skill = {
+      name: skillName
+    };
 
-    this.userService.update(id, profile).subscribe(data => {
-      if (data) {
+    this.userService.update(id, profile).subscribe((data: any) => {
+      console.log('data', data);
+         // profileSkill not data
+      if(data.profileSkill.length === 0) {
+        // insert skill
+        this.skillService.create(skill).subscribe((s: any) => {
+          const ps = {
+            level_id: levelid,
+            profile_id: data.profile_id,
+            skill_id: s.skill_id
+          };
+          this.profileSkillService.create(ps).subscribe(p => {
+            this.router.navigate(['customers']);
+          });
 
-        setTimeout(() => {
-          this.router.navigate(['customers/detail/', id]);
-        }, 1000);
+        });
+
+      }else {
+        // update skill
+        // update profileSkill
       }
     });
   }
@@ -112,8 +138,4 @@ export class EditUserComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log('submit', this.editSkillForm.value);
-
-  }
 }

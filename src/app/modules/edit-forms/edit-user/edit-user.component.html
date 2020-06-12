@@ -139,7 +139,7 @@
           <mat-divider></mat-divider>
         </mat-list>
         <mat-card-content class="custom-mr">
-          <form [formGroup]="editSkillForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="editSkillForm" >
             <!-- <mat-form-field class="full">
                 <input matInput placeholder="email" formControlName="email">
             </mat-form-field> -->
@@ -163,9 +163,6 @@
                           </mat-option>
                           <mat-option value= "3">
                             3
-                          </mat-option>
-                          <mat-option value= "4">
-                            4
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
