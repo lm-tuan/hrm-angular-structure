@@ -19,6 +19,7 @@ export class AddFormCustomerComponent implements OnInit {
   user: any;
   skill: any;
   levels: any;
+  isLoading = false;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -34,24 +35,21 @@ export class AddFormCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.addSkill('', 1, 0);
-   
   }
   private buildForm(): void {
     this.addForm = this.formBuilder.group({
-      fullName: ['', Validators.required],
-      address: ['', Validators.required],
-      idCard: ['', Validators.required],
-      email: ['', Validators.required],
-      phone: ['', Validators.required],
-      startDate: ['', Validators.required],
-      birthday: ['', Validators.required],
-      gender: ['', Validators.required],
-      position: ['', Validators.required]
+      fullName: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(5)]),
+      address: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]),
+      idCard: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl('', [Validators.required]),
+      startDate: new FormControl('', [Validators.required]),
+      birthday: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
+      position: new FormControl('', [Validators.required])
     });
   }
   add() {
-    console.log('submit2', this.addSkillForm.value, );
-    console.log('submit3', this.addForm.value,  );
     // Data form profile
     const { fullName, address, idCard, email, phone, birthday, gender, position } = this.addForm.value;
     const profile = {
@@ -116,6 +114,10 @@ export class AddFormCustomerComponent implements OnInit {
     this.addSkillForm = this.formBuilder.group({
       skills: this.formBuilder.array([])
     });
+  }
+
+ hasError = (controlName: string, errorName: string) =>{
+    return this.addForm.controls[controlName].hasError(errorName);
   }
 
 }

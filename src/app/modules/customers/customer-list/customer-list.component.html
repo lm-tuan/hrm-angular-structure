@@ -1,6 +1,6 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center none">
     <div fxFlex="95%">
-  
+      <mat-spinner class="progress-custom" *ngIf="isLoading"></mat-spinner>
       <mat-card>
         <mat-card-content>
           <h2>Employees</h2>
@@ -79,7 +79,7 @@
                       <mat-icon (click)="onLinkEdit(element.profile_id)"  >edit</mat-icon>
                     </button>
                     <button class="custom-button" color="warn" mat-mini-fab  aria-label="Example icon button with a plus one icon">
-                      <mat-icon >delete</mat-icon>
+                      <mat-icon (click)= "onDelete(element.profile_id)" >delete</mat-icon>
                     </button>
                   </div>
                 </td>
