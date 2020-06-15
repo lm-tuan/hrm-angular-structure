@@ -45,7 +45,7 @@ export class EditUserComponent implements OnInit {
         idCard: [user.idCard, Validators.required],
         email: [user.email, Validators.required],
         phone: [user.phone, Validators.required],
-        startDate: [user.startDate, Validators.required],
+        startDate: [user.start_date, Validators.required],
         birthday: [user.birthday, Validators.required],
         gender: [user.gender, Validators.required],
         position: [user.postion, Validators.required]
@@ -53,21 +53,20 @@ export class EditUserComponent implements OnInit {
     });
   }
   edit() {
-    console.log('submit', this.editSkillForm.value);
-    console.log('submit', this.editForm.value);
-    const { fullName, address, idCard, email, phone, birthday, gender, position } = this.editForm.value;
+    const { fullName, address, startDate, idCard, email, phone, birthday, gender, position } = this.editForm.value;
     const skillName = this.editSkillForm.value.skills[0].skill;
     const levelid = this.editSkillForm.value.skills[0].level;
     const id = this.route.snapshot.params.id;
     const profile = {
       fullName,
-      // address,
+      address,
       idCard,
       email,
       phone,
       gender: Number(gender),
       position,
-      birthday: moment(birthday).format('YYYY-MM-DD')
+      birthday: moment(birthday).format('YYYY-MM-DD'),
+      start_date: moment(startDate).format('YYYY-MM-DD')
     };
     const skill = {
       name: skillName

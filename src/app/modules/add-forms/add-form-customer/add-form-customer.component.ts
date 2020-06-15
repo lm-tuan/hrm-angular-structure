@@ -51,15 +51,16 @@ export class AddFormCustomerComponent implements OnInit {
   }
   add() {
     // Data form profile
-    const { fullName, address, idCard, email, phone, birthday, gender, position } = this.addForm.value;
+    const { fullName, address, startDate, idCard, email, phone, birthday, gender, position } = this.addForm.value;
     const profile = {
       fullName,
-      // address,
+      address,
       idCard,
       email,
       phone,
       gender: Number(gender),
       position,
+      start_date: moment(startDate).format('YYYY-MM-DD'),
       birthday: moment(birthday).format('YYYY-MM-DD')
     };
 
