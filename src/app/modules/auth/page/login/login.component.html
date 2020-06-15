@@ -3,6 +3,7 @@
         <form class="login-form" fxFlex  (ngSubmit)="login()" [formGroup]="loginForm" >
             <div class="text-center">
                 <h2 class="app-name">Brycen HRM</h2>
+                <mat-error *ngIf="isLoginFailed">Username and password are incorrect ! Please enter again ! </mat-error>
             </div>
             <div fxFlex  fxlayout="row" fxlayout.lt-md="column">
                 <div fxFlexFill>
