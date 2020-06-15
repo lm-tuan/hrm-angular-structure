@@ -29,42 +29,45 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     // Check on brower have token
-    if (localStorage.getItem('access_token')) {
-      console.log('toàng');
+    if (sessionStorage.getItem('auth-token')) {
       this.isLoggedIn = true;
       this.router.navigate(['employee']);
+    }else {
+      this.isLoggedIn = false;
+      this.isLoginFailed = true;
+      this.router.navigate(['auth/login']);
     }
   }
 
   login() {
-    const IUSER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
-    const USERNAME = 'admin';
-    const PASSWORD = 'admin';
-    this.authService.get().subscribe((data: any) => {
-      if (data.username === USERNAME && data.password === PASSWORD){
-        const userStore = {userid: IUSER };
-        localStorage.setItem('access_token', JSON.stringify(userStore));
-        this.router.navigate(['employee']);
-      }
-      return;
-    });
+    // const IUSER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+    // const USERNAME = 'admin';
+    // const PASSWORD = 'admin';
+    // this.authService.get().subscribe((data: any) => {
+    //   if (data.username === USERNAME && data.password === PASSWORD){
+    //     const userStore = {userid: IUSER };
+    //     localStorage.setItem('access_token', JSON.stringify(userStore));
+    //     this.router.navigate(['employee']);
+    //   }
+    //   return;
+    // });
     // test
     // console.log(this.loginForm.value);
     // this.router.navigate(['employee']);
-    // this.authService.login(this.loginForm.value)
-    //   .subscribe(data => {
-    //     this.tokenStorage.saveToken(data.accessToken);
-    //     this.tokenStorage.saveUser(data);
-    //     this.isLoginFailed = false;
-    //     this.isLoggedIn = true;
-    //     this.roles = this.tokenStorage.getUser().roles;
-    //     this.router.navigate(['customers-test']);
-    //   },
-    //   err => {
-    //     this.errorMessage = err.error.message;
-    //     this.isLoginFailed = true;
-    //   }
-    //   );
+    this.authService.login(this.loginForm.value)
+      .subscribe(data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+        this.router.navigate(['employee']);
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+      );
   }
 
   get f() {

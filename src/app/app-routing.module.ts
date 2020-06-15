@@ -50,7 +50,7 @@ const routes: Routes = [
       import('./modules/auth/auth.module').then(m => m.AuthModule)
   },
   // Fallback when no prior routes is matched
-   { path: '**', redirectTo: '/customers', pathMatch: 'full' },
+   { path: '**', redirectTo: '/employee', pathMatch: 'full' },
 ];
 
 
