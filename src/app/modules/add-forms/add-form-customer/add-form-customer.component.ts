@@ -66,7 +66,6 @@ export class AddFormCustomerComponent implements OnInit {
     // Data form skill
     const skillName = this.addSkillForm.value.skills[0].skill;
     const levelid = this.addSkillForm.value.skills[0].level;
-    console.log('skillName', skillName);
     this.isLoading = true;
     const skill = {
       name: skillName

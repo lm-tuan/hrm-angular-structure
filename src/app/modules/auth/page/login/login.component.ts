@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/service/token-storage.service';
 import { AuthService } from 'src/app/core/service/authService';
 import { Router } from '@angular/router';
@@ -29,8 +29,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     // Check on brower have token
-    if (sessionStorage.getItem('auth-token')) {
-      this.isLoggedIn = true;
+    if (sessionStorage.getItem('auth-token') && this.isLoggedIn) {
       this.router.navigate(['employee']);
     }else {
       this.isLoggedIn = false;
@@ -40,20 +39,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // const IUSER = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
-    // const USERNAME = 'admin';
-    // const PASSWORD = 'admin';
-    // this.authService.get().subscribe((data: any) => {
-    //   if (data.username === USERNAME && data.password === PASSWORD){
-    //     const userStore = {userid: IUSER };
-    //     localStorage.setItem('access_token', JSON.stringify(userStore));
-    //     this.router.navigate(['employee']);
-    //   }
-    //   return;
-    // });
-    // test
-    // console.log(this.loginForm.value);
-    // this.router.navigate(['employee']);
     this.authService.login(this.loginForm.value)
       .subscribe(data => {
         this.tokenStorage.saveToken(data.accessToken);
@@ -64,6 +49,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['employee']);
       },
       err => {
+        console.log('err', err);
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
@@ -76,9 +62,12 @@ export class LoginComponent implements OnInit {
 
   private buildForm(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
     });
+  }
+  hasError = (controlName: string, errorName: string) =>{
+    return this.loginForm.controls[controlName].hasError(errorName);
   }
 
 }

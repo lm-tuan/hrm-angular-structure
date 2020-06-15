@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
   }
   Logout(){
-    localStorage.removeItem('access_token');
+    sessionStorage.removeItem('auth-token');
     this.router.navigate(['/auth/login']);
   }
 

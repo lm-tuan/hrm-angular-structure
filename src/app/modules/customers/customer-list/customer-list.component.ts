@@ -28,6 +28,15 @@ export class CustomerListComponent implements OnInit {
         console.log(data);
         this.dataSource = data;
         this.isLoading = false;
+      }, err => {
+        if (err.status === 401){
+          console.log('toang rồi');
+          
+          this.router.navigate(['auth/login']);
+          console.log('toang rồi1111');
+        }
+        console.log('err', err);
+        
       });
     }, 1000);
   }
