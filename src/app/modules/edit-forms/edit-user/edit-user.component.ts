@@ -19,6 +19,7 @@ export class EditUserComponent implements OnInit {
   editSkillForm: FormGroup;
   user: any;
   skill: any;
+  testgender = [1, 0];
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -47,7 +48,7 @@ export class EditUserComponent implements OnInit {
         phone: [user.phone, Validators.required],
         startDate: [user.start_date, Validators.required],
         birthday: [user.birthday, Validators.required],
-        gender: [user.gender, Validators.required],
+        gender: [Number(user.gender), Validators.required],
         position: [user.postion, Validators.required]
       });
     });

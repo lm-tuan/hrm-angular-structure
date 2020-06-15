@@ -82,7 +82,7 @@
           
                       <mat-form-field class="custom-gender">
                         <mat-label>Giới tính</mat-label>
-                        <mat-select formControlName="gender">
+                        <mat-select formControlName="gender" [(ngModel)]="user.gender">
                           <mat-option value=0>
                             Nữ
                           </mat-option>

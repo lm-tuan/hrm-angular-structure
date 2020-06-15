@@ -41,6 +41,12 @@ const routes: Routes = [
         loadChildren: () =>
         import('./modules/skill/skill-add/skill-add.module').then(m => m.SkillAddModule)
       },
+      // user
+      {
+        path: 'users',
+        loadChildren: () =>
+        import('./modules/user/user-list/user-list.module').then(m => m.UsersModule)
+      },
     ]
   },
   {

@@ -29,6 +29,7 @@ import { SkillAddModule } from './modules/skill/skill-add/skill-add.module';
 import { SkillService } from './core/service/skillService';
 import { LevelSkillService } from './core/service/LevelSkillService';
 import { ProfileSkillService } from './core/service/ProfileSkillService';
+import { UsersModule } from './modules/user/user-list/user-list.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,8 @@ import { ProfileSkillService } from './core/service/ProfileSkillService';
     // skill
     SkillsModule,
     SkillAddModule,
+    // user
+    UsersModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule

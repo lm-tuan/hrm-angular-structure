@@ -90,12 +90,16 @@
         <p mat-line>Skill</p>
       </a>
 
-        <a mat-list-item  routerLinkActive="active">
-          <mat-icon mat-list-icon>
-            people
-          </mat-icon>
-          <p mat-line>Users</p>
-        </a>
+      <a
+      mat-list-item
+      [routerLink]="['/users']"
+      routerLinkActive="active"
+    >
+      <mat-icon mat-list-icon>
+        people
+      </mat-icon>
+      <p mat-line>User</p>
+    </a>
 
         
         <a mat-list-item [routerLink]="['/auth/login']">
