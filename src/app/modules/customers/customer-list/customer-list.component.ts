@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from 'src/app/core/service/user.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-customer-list',
@@ -12,12 +13,15 @@ export class CustomerListComponent implements OnInit {
   displayedColumns: string[] = ['No', 'Full name', 'Birthday', 'Gender', 'Mã nhân viên', 'Phone', 'Email', 'Bộ phận', 'Skill', 'Detail'];
   dataSource;
   isLoading = false;
+  searchForm: FormGroup;
   constructor(
     private router: Router,
     private userService: UserService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.buildForm();
     this.getAll();
   }
 
@@ -30,13 +34,9 @@ export class CustomerListComponent implements OnInit {
         this.isLoading = false;
       }, err => {
         if (err.status === 401){
-          console.log('toang rồi');
-          
           this.router.navigate(['auth/login']);
-          console.log('toang rồi1111');
         }
         console.log('err', err);
-        
       });
     }, 1000);
   }
@@ -58,5 +58,17 @@ export class CustomerListComponent implements OnInit {
       });
     },
     2000);
+  }
+
+  private buildForm(): void {
+    this.searchForm = this.formBuilder.group({
+      searchName: new FormControl('', []),
+      searchDep: new FormControl('', []),
+      searchSkill: new FormControl('', []),
+    });
+  }
+  search(){
+    console.log('search', this.searchForm.value);
+    
   }
 }

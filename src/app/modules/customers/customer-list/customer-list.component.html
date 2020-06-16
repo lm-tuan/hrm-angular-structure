@@ -15,17 +15,18 @@
           <div class="item item-1" fxFlex="20%">
             <button class="button-custom-add" [routerLink]="['/employee/add']" mat-raised-button color="primary">+ Thêm nhân viên</button> 
           </div>
+          <form class="search-form" fxFlex (ngSubmit)="search()" [formGroup]="searchForm">
           <div class="item item-2" fxFlex="80%">
             <div class="example-container">
               <mat-form-field appearance="fill">
                 <mat-label>Search tên</mat-label>
-                <input matInput #input maxlength="10" placeholder="Tuấn">
+                <input formControlName="searchName" matInput #input maxlength="10" placeholder="Tuấn">
                 <mat-hint align="end"></mat-hint>
               </mat-form-field>
             
               <mat-form-field appearance="fill">
                 <mat-label>Bộ phận</mat-label>
-                <mat-select>
+                <mat-select formControlName="searchDep">
                   <mat-option value="option">Option1</mat-option>
                   <mat-option value="option">Option2</mat-option>
                 </mat-select>
@@ -33,7 +34,7 @@
 
               <mat-form-field appearance="fill">
                 <mat-label>Skills</mat-label>
-                <mat-select>
+                <mat-select formControlName="searchSkill">
                   <mat-option value="option">Option1</mat-option>
                   <mat-option value="option">Option2</mat-option>
                 </mat-select>
@@ -43,6 +44,7 @@
             </button>
             </div>
           </div>
+        </form>
         </div>
           <table mat-table [dataSource]="dataSource" matSort>
             
