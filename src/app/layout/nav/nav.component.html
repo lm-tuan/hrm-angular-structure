@@ -68,6 +68,16 @@
     <mat-sidenav #snav fixedTopGap="56" class="sidenav">
       <mat-nav-list>
         <h3 mat-subheader>Home</h3>
+        <a
+          mat-list-item
+          [routerLink]="['/dashboard']"
+          routerLinkActive="active"
+        >
+          <mat-icon mat-list-icon>
+            dashboard
+          </mat-icon>
+          <p mat-line>Dashboard</p>
+        </a>
 
         <a
           mat-list-item
@@ -85,7 +95,7 @@
         routerLinkActive="active"
       >
         <mat-icon mat-list-icon>
-          dashboard
+          restaurant_menu
         </mat-icon>
         <p mat-line>Skill</p>
       </a>
