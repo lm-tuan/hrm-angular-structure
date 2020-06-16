@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const baseUrl = 'http://192.168.4.201:8080/api/profile';
-// const baseUrl = 'http://localhost:8080/api/profile';
+const baseUrl = 'http://192.168.4.201:8080/api/level-skill';
+// const baseUrl = 'http://localhost:8080/api/level-skill';
 
 @Injectable({ providedIn: 'root'})
-export class UserService {
+export class LevelSkillService {
 
   constructor(private http: HttpClient){
   }

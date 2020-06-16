@@ -25,6 +25,7 @@
           }
       }
   }
+  
 
   &:after {
       content: '';
@@ -65,4 +66,69 @@
 
 .mat-card-custom{
   position: relative;
+}
+
+
+
+//css
+
+.mt-10{
+  margin-top: 20px;
+}
+
+example-label {
+display: table-cell;
+font-size: 14px;
+margin-left: 8px;
+width: 120px;
+}
+
+.example-button-row {
+display: table-cell;
+}
+
+.example-button-row button {
+display: table-cell;
+margin-right: 8px;
+}
+
+.example-flex-container {
+display: flex;
+justify-content: space-between;
+width: 150px;
+}
+
+.example-button-container {
+display: flex;
+justify-content: center;
+width: 120px;
+}
+
+.fxLayout-custom{
+  width: 90%;
+  height: 90%;
+  margin: auto;
+}
+
+.progress-custom{
+position: absolute;
+top: 38%;
+left: 50%;
+z-index: 99;
+}
+.mat-card{
+margin-top: 10px;
+}
+
+.custom-level{
+  margin-left: 20px;
+}
+.group-skill{
+  margin-top: 56px !important;
+}
+.custom-mr{
+  margin-top: 65px;
+}
+.mat-card .mat-focus-indicator .mat-card-custom{
+  box-shadow:none;
 }

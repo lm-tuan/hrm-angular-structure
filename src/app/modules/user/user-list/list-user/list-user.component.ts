@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { UserService } from 'src/app/core/service/user.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/service/user.service';
 
 @Component({
-  selector: 'app-customer-list',
-  templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.scss']
+  selector: 'app-list-user',
+  templateUrl: './list-user.component.html',
+  styleUrls: ['./list-user.component.scss']
 })
-export class CustomerListComponent implements OnInit {
+export class ListUserComponent implements OnInit {
+
   displayedColumns: string[] = ['No', 'Full name', 'Birthday', 'Gender', 'Mã nhân viên', 'Phone', 'Email', 'Bộ phận', 'Skill', 'Detail'];
   dataSource;
   isLoading = false;

@@ -1,110 +1,247 @@
 <div fxLayout="column" class="fxLayout-custom">
-    <mat-spinner class="progress-custom" *ngIf="isLoading" ></mat-spinner>
-    <mat-list>
+  <mat-spinner class="progress-custom" *ngIf="isLoading"></mat-spinner>
+  <mat-card>Employee / Profile</mat-card>
+
+  <div class="mt-10" fxLayout="row" fxLayoutGap="20px" fxFlex>
+    <mat-card class="example-card" fxFlex="20">
+      <mat-card-content>
+        <div
+          style="margin: 20px;"
+          px
+          fxLayout="column"
+          fxLayoutAlign="space-between center"
+        >
+          <div>
+            <img
+              style="width: 200px; height: 200px; border-radius: 50%;"
+              mat-card-image
+              src="./assets/imgs/logo-angular.png"
+              alt="Photo of a Shiba Inu"
+            />
+          </div>
+          <div *ngIf="user">
+            <h1>{{ user.fullName }}</h1>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions> </mat-card-actions>
+    </mat-card>
+    <mat-card class="example-card" fxFlex="40" *ngIf="user">
+      <mat-list>
         <mat-list-item>
-            Profile
+          Profile
         </mat-list-item>
         <mat-divider></mat-divider>
       </mat-list>
-    <div class="mt-10" fxLayout="row" fxLayoutGap="20px" fxFlex>
-        <mat-card class="example-card" fxFlex="30">
-            <mat-card-content>
-                <div style="margin: 20px;" px fxLayout="column" fxLayoutAlign="space-between center">
-                    <div>
-                        <img style="width: 200px; height: 200px; border-radius: 50%;" mat-card-image
-                            src="./assets/imgs/logo-angular.png" alt="Photo of a Shiba Inu">
-                    </div>
-                    <div *ngIf="user">
-                        <h1> {{user.fullName}}</h1>
-                    </div>
+      <mat-card-content>
+        <div style="margin: 10px;" fxLayout="column">
+          <div fxLayout="column" fxLayoutGap="10px">
+            <div class="content">
+              <div class="layout1" fxLayout="row" fxLayoutGap="20px">
+                <div>
+                  <mat-icon class="mat-12">person</mat-icon>
                 </div>
-            </mat-card-content>
-            <mat-card-actions>
-            </mat-card-actions>
-        </mat-card>
-        <mat-card class="example-card" fxFlex="70" *ngIf="user">
-            <mat-card-content>
-                <div style="margin: 10px;" fxLayout="column">
-                    <div fxLayout="column" fxLayoutGap="10px">
-                        <div class="content">
+                <div>
+                  <p style="font-size: 18px; margin-top: 3px;">
+                    Full Name: {{ user.fullName }}
+                  </p>
+                </div>
+              </div>
+              <div class="layout2" fxLayout="row" fxLayoutGap="20px">
+                <div>
+                  <mat-icon class="mat-12">cake</mat-icon>
+                </div>
+                <div>
+                  <p style="font-size: 18px; margin-top: 3px;">
+                    Birthday: {{ user.birthday }}
+                  </p>
+                </div>
+              </div>
+              <div class="layout2" fxLayout="row" fxLayoutGap="20px">
+                <div>
+                  <mat-icon class="mat-12">phone</mat-icon>
+                </div>
+                <div>
+                  <p style="font-size: 18px; margin-top: 3px;">
+                    Phone : {{ user.phone }}
+                  </p>
+                </div>
+              </div>
+              <div class="layout2" fxLayout="row" fxLayoutGap="20px">
+                <div>
+                  <mat-icon class="mat-12">email</mat-icon>
+                </div>
+                <div>
+                  <p style="font-size: 18px; margin-top: 3px;">
+                    Email : {{ user.email }}
+                  </p>
+                </div>
+              </div>
+              <div class="layout2" fxLayout="row" fxLayoutGap="20px">
+                <div>
+                  <mat-icon class="mat-12">card_membership</mat-icon>
+                </div>
+                <div>
+                  <p style="font-size: 18px; margin-top: 3px;">
+                    IDCard : {{ user.idCard }}
+                  </p>
+                </div>
+              </div>
+              <div class="layout2" fxLayout="row" fxLayoutGap="20px">
+                <div>
+                  <mat-icon class="mat-12"> trip_origin</mat-icon>
+                </div>
+                <div>
+                  <p style="font-size: 18px; margin-top: 3px;">
+                    Gender: {{ user.gender ? "Nam" : "Nữ" }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="example-button-row">
+              <div class="example-flex-container">
+                <div class="example-button-container">
+                    <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
+                      <mat-icon (click) = "redirectToEdit(user.profile_id)" >edit</mat-icon>
+                    </button>
+                  </div>
+                  <div class="example-button-container">
+                    <button color="warn" mat-mini-fab  aria-label="Example icon button with a plus one icon">
+                      <mat-icon (click) = "removeUser(user.profile_id)">delete</mat-icon>
+                    </button>
+                  </div>
+                  <div class="example-button-container">
+                    <button mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+                      <mat-icon (click) = "redirectToHome()">home</mat-icon>
+                    </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="example-card" fxFlex="40" *ngIf="user">
+      <mat-list>
+        <mat-list-item>
+          Skill
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+      <mat-card-content>
+        <div style="margin: 10px;" fxLayout="column">
+          <div fxLayout="column" fxLayoutGap="10px">
+            <div class="content">
+              <div
+                class="container mt-20"
+                fxLayout
+                fxLayout.xs="column"
+                fxLayoutAlign="center"
+                fxLayoutGap="10px"
+                fxLayoutGap.xs="0"
+              >
+                <div class="item item-1" fxFlex="40%">
+                    <mat-list>
+                        <mat-list-item>
                             <div class="layout1" fxLayout="row" fxLayoutGap="20px">
-                                <div>
-                                    <mat-icon class="mat-12">person</mat-icon>
-                                </div>
-                                <div>
-                                    <p style="font-size: 18px; margin-top: 3px;">Full Name: {{user.fullName}}</p>
+                                <div style="display: flex;">
+                                    <mat-icon class="mat-12" style="color:chocolate">local_dining </mat-icon>
+                                    <p style="font-size: 18px; margin-top: 3px;"><b>Skill</b></p>
                                 </div>
                             </div>
-                            <div class="layout2" fxLayout="row" fxLayoutGap="20px">
-                                <div>
-                                    <mat-icon class="mat-12">cake</mat-icon>
-                                </div>
-                                <div>
-                                    <p style="font-size: 18px; margin-top: 3px;">Birthday: {{user.birthday}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="layout2" fxLayout="row" fxLayoutGap="20px">
-                                <div>
-                                    <mat-icon class="mat-12">phone</mat-icon>
-                                </div>
-                                <div>
-                                    <p style="font-size: 18px; margin-top: 3px;">Phone : {{user.phone}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="layout2" fxLayout="row" fxLayoutGap="20px">
-                                <div>
-                                    <mat-icon class="mat-12">email</mat-icon>
-                                </div>
-                                <div>
-                                    <p style="font-size: 18px; margin-top: 3px;">Email : {{user.email}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="layout2" fxLayout="row" fxLayoutGap="20px">
-                                <div>
-                                    <mat-icon class="mat-12">card_membership</mat-icon>
-                                </div>
-                                <div>
-                                    <p style="font-size: 18px; margin-top: 3px;">IDCard : {{user.idCard}}
-
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="layout2" fxLayout="row" fxLayoutGap="20px">
-                                <div>
-                                    <mat-icon class="mat-12"> trip_origin</mat-icon>
-                                </div>
-                                <div>
-                                    <p style="font-size: 18px; margin-top: 3px;">Gender: {{user.gender ? "Nam" : "Nữ"}}
-
-                                    </p>
-                                </div>
-                            </div>
-                     </div>
-                        <div class="example-button-row">
-                            <div class="example-flex-container">
-                              <div class="example-button-container">
-                                <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
-                                  <mat-icon (click) = "redirectToEdit(user.id)" >edit</mat-icon>
-                                </button>
-                              </div>
-                              <div class="example-button-container">
-                                <button color="warn" mat-mini-fab  aria-label="Example icon button with a plus one icon">
-                                  <mat-icon (click) = "removeUser(user.id)">delete</mat-icon>
-                                </button>
-                              </div>
-                              <div class="example-button-container">
-                                <button mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
-                                  <mat-icon (click) = "redirectToHome()">home</mat-icon>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list>
                 </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+                <div class="item item-2" fxFlex="20%">
+                    <mat-list>
+                        <mat-list-item>
+                            <div class="layout1" fxLayout="row" fxLayoutGap="20px">
+                                <div style="display: flex;">
+                                    <mat-icon class="mat-12" style="color: rgb(236, 113, 113)">military_tech </mat-icon>
+                                    <p style="font-size: 18px; margin-top: 3px;"><b>Level</b></p>
+                                </div>
+                            </div>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+                </div>
+                <div class="item item-4" fxFlex="40%">
+                    <mat-list>
+                        <mat-list-item>
+                            <div class="layout1" fxLayout="row" fxLayoutGap="20px">
+                                <div style="display: flex;">
+                                    <mat-icon class="mat-12" style="color: rgb(236, 113, 113)">description </mat-icon>
+                                    <p style="font-size: 18px; margin-top: 3px;"><b>Description</b></p>
+                                </div>
+                            </div>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+                </div>
+                
+                
+              </div>
+              <!-- for each skill -->
+              <div class="group-skill"*ngFor="let item of user.profileSkill">
+                <div
+                    class="container mt-20"
+                    fxLayout
+                    fxLayout.xs="column"
+                    fxLayoutAlign="center"
+                    fxLayoutGap="10px"
+                    fxLayoutGap.xs="0"
+                    >
+                    <div class="item item-1" fxFlex="40%">
+                        <mat-list>
+                            <mat-list-item>
+                                <div class="layout1" fxLayout="row" fxLayoutGap="20px">
+                                    <div style="display: flex;">
+                                        <mat-icon class="mat-12" style="color:chocolate"> </mat-icon>
+                                        <p style=" text-transform:uppercase; font-size: 15px; margin-top: 3px;">{{item.skill.name}}</p>
+                                    </div>
+                                </div>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </mat-list>
+                    </div>
+                    <div class="item item-2" fxFlex="20%">
+                        <mat-list>
+                            <mat-list-item>
+                                <div class="layout1" fxLayout="row" fxLayoutGap="20px">
+                                    <div style="display: flex;">
+                                        <mat-icon class="mat-12" style="color:chocolate"> </mat-icon>
+                                        <p style="font-size: 15px; margin-top: 3px;">{{item.level.name}}</p>
+                                    </div>
+                                </div>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </mat-list>
+                    </div>
+                    <div class="item item-3" fxFlex="40%">
+                        <mat-list>
+                            <mat-list-item>
+                                <div class="layout1" fxLayout="row" fxLayoutGap="20px">
+                                    <div style="display: flex;">
+                                    <mat-icon class="mat-12" style="color:blue"> </mat-icon>
+                                        <p style=" text-transform:uppercase; font-size: 15px; margin-top: 3px;">{{item.level.description}}</p>
+                                    </div>
+                                </div>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </mat-list>
+                    </div>
+                    </div>
+              </div>
+              
+            
+              <!-- end forechm skill -->
+              
+            </div>
+           
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
