@@ -69,6 +69,7 @@ export class CustomerListComponent implements OnInit {
   }
   search(){
     console.log('search', this.searchForm.value);
-    
   }
+
+  
 }

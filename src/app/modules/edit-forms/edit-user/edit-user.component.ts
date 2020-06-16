@@ -19,6 +19,7 @@ export class EditUserComponent implements OnInit {
   editSkillForm: FormGroup;
   user: any;
   skill: any;
+  skills: any;
   testgender = [1, 0];
   constructor(
     private formBuilder: FormBuilder,

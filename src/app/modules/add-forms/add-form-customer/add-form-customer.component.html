@@ -134,8 +134,14 @@
             <div *ngFor="let skill of skillForms.controls; let i=index" [formGroupName]="i">
 
 
-              <mat-form-field class="xs">
-                <input matInput placeholder="skill" formControlName="skill">
+              <mat-form-field class="xs" >
+                <mat-select formControlName="level">
+                  <div *ngFor=" let s of skills;">
+                  <mat-option value="s.skill_id">
+                    {{s.name}}
+                  </mat-option>
+                </div>
+                </mat-select>
               </mat-form-field>
 
               <mat-form-field class="custom-level">

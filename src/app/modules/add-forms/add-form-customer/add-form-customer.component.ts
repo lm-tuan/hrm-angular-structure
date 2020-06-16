@@ -20,6 +20,7 @@ export class AddFormCustomerComponent implements OnInit {
   skill: any;
   levels: any;
   isLoading = false;
+  skills: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -33,6 +34,9 @@ export class AddFormCustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.skillService.getAll().subscribe(skills => {
+      this.skills = skills;
+    });
     this.createForm();
     this.addSkill('', 1, 0);
   }
