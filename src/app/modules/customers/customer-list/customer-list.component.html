@@ -27,8 +27,11 @@
               <mat-form-field appearance="fill">
                 <mat-label>Bộ phận</mat-label>
                 <mat-select formControlName="searchDep">
-                  <mat-option value="option">Option1</mat-option>
-                  <mat-option value="option">Option2</mat-option>
+                  <div *ngFor=" let d of departments;">
+                    <mat-option [value]="d.department_id">
+                      {{d.name}}
+                    </mat-option>
+                  </div>
                 </mat-select>
               </mat-form-field>
 

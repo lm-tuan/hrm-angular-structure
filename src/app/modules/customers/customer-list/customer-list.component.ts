@@ -4,6 +4,8 @@ import { UserService } from 'src/app/core/service/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { SkillService } from 'src/app/core/service/skillService';
+import { zip } from 'rxjs';
+import { DepartmentService } from 'src/app/core/service/departmentService';
 
 @Component({
   selector: 'app-customer-list',
@@ -16,28 +18,35 @@ export class CustomerListComponent implements OnInit {
   isLoading = false;
   searchForm: FormGroup;
   skills;
+  departments;
   constructor(
     private router: Router,
     private userService: UserService,
     private skillService: SkillService,
+    private departmentService: DepartmentService,
     private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
-    this.skillService.getAll().subscribe(skills => {
-      console.log(skills);
-      this.skills = skills;
-    });
     this.buildForm();
-    this.getAll();
+    this.fetchData();
   }
 
-  getAll(){
+
+   // processing in parallel by use zip observable
+  fetchData(){
     this.isLoading = true;
     setTimeout(() => {
-      this.userService.getAll().subscribe(data => {
-        console.log(data);
-        this.dataSource = data;
+      zip(
+        this.skillService.getAll(),
+        this.userService.getAll(),
+        this.departmentService.getAll()
+      ).subscribe(data => {
+        console.log('data', data);
+        
+        this.skills = data[0];
+        this.dataSource = data[1];
+        this.departments = data[2];
         this.isLoading = false;
       }, err => {
         if (err.status === 401){
@@ -61,7 +70,7 @@ export class CustomerListComponent implements OnInit {
       this.userService.delete(id).subscribe(data => {
         console.log('data', data);
         this.isLoading = false;
-        this.getAll();
+        this.fetchData();
       });
     },
     2000);
