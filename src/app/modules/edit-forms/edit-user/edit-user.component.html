@@ -97,7 +97,7 @@
                   <div fxFlex fxLayout="row" fxLayout.lt-md="column">
                       <div fxFlexFill>
                         <mat-form-field style="width: 100%;">
-                        <mat-label>Bộ phận</mat-label>
+                        <mat-label>Vị trí</mat-label>
                         <mat-select formControlName="position" [(ngModel)]="user.position" >
                           <mat-option value="DEV">
                             DEV 
@@ -146,11 +146,16 @@
             <div formArrayName="skills">
         
                 <div *ngFor="let skill of skillForms.controls; let i=index" [formGroupName]="i">
-        
-        
-                    <mat-form-field class="xs">
-                        <input matInput placeholder="skill" formControlName="skill">
-                    </mat-form-field>
+                  <mat-form-field >
+                    <mat-label>Skill</mat-label>
+                    <mat-select formControlName="skill" [(ngModel)]="user.profileSkill[0]?.skill.skill_id">
+                      <div *ngFor="let s of nameSkills; ">
+                        <mat-option [value]="s.skill_id">
+                          {{s.name}}
+                        </mat-option>
+                      </div>
+                    </mat-select>
+                  </mat-form-field>
         
                     <mat-form-field class="custom-level">
                         <mat-label>Level</mat-label>

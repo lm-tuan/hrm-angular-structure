@@ -20,6 +20,7 @@ export class EditUserComponent implements OnInit {
   user: any;
   skill: any;
   skills: any;
+  nameSkills: any;
   testgender = [1, 0];
   constructor(
     private formBuilder: FormBuilder,
@@ -34,6 +35,9 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.skillService.getAll().subscribe(data => {
+      this.nameSkills = data;
+    });
     this.createForm();
     this.fetchDataById();
   }
@@ -59,6 +63,7 @@ export class EditUserComponent implements OnInit {
     const skillName = this.editSkillForm.value.skills[0].skill;
     const levelid = this.editSkillForm.value.skills[0].level;
     const id = this.route.snapshot.params.id;
+    console.log('skill-id', skillName);
     const profile = {
       fullName,
       address,
@@ -70,33 +75,25 @@ export class EditUserComponent implements OnInit {
       birthday: moment(birthday).format('YYYY-MM-DD'),
       start_date: moment(startDate).format('YYYY-MM-DD')
     };
-    const skill = {
-      name: skillName
-    };
+    console.log('ssd');
 
     this.userService.update(id, profile).subscribe((data: any) => {
-      console.log('data', data);
-         // profileSkill not data
-      if(data.profileSkill.length === 0) {
-        // insert skill
-        this.skillService.create(skill).subscribe((s: any) => {
-          const ps = {
-            level_id: levelid,
-            profile_id: data.profile_id,
-            skill_id: s.skill_id
-          };
-          this.profileSkillService.create(ps).subscribe(p => {
-            this.router.navigate(['employee']);
-          });
-
+      const ps = {
+        level_id: levelid,
+        profile_id: data.profile_id,
+        skill_id: skillName
+      };
+      // profileSkill not data
+      if (data.profileSkill.length === 0) {
+        this.profileSkillService.create(ps).subscribe(p => {
+          this.router.navigate(['employee']);
+        });
+      } else {
+        const idProfileSkill = data.profileSkill[0].id_profile_skill;
+        this.profileSkillService.update(idProfileSkill, ps).subscribe(p => {
+          this.router.navigate(['employee']);
         });
 
-      }else {
-        // update skill
-        // update profileSkill
-        this.skillService.update(data.profileSkill[0].skill.skill_id, skill).subscribe(ups => {
-          this.router.navigate(['employee']);
-        })
       }
     });
   }
