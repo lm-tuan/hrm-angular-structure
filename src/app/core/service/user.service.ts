@@ -4,6 +4,12 @@ import { HttpClient } from '@angular/common/http';
 const baseUrl = 'http://192.168.4.201:8080/api/profile';
 // const baseUrl = 'http://localhost:8080/api/profile';
 
+export enum ESearchUser {
+  FULLNAME = 'fullname',
+  SKILLID = 'skillId',
+  DEPARTMENTID = 'departmentId'
+}
+
 @Injectable({ providedIn: 'root'})
 export class UserService {
 
@@ -12,6 +18,10 @@ export class UserService {
 
   getAll() {
     return this.http.get(baseUrl);
+  }
+  getSearch(searchUser) {
+    const url = `fullname=${searchUser.fullname ? searchUser.fullname : '' }&skillId=${searchUser.skillId ? searchUser.skillId : ''}&departmentId=${searchUser.departmentId ? searchUser.departmentId : '' }`;
+    return this.http.get(`${baseUrl}/filter?${url}`);
   }
 
   get(id) {

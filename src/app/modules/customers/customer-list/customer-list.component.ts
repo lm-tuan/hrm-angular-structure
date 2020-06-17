@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from 'src/app/core/service/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { SkillService } from 'src/app/core/service/skillService';
 
 @Component({
   selector: 'app-customer-list',
@@ -14,13 +15,19 @@ export class CustomerListComponent implements OnInit {
   dataSource;
   isLoading = false;
   searchForm: FormGroup;
+  skills;
   constructor(
     private router: Router,
     private userService: UserService,
+    private skillService: SkillService,
     private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.skillService.getAll().subscribe(skills => {
+      console.log(skills);
+      this.skills = skills;
+    });
     this.buildForm();
     this.getAll();
   }
@@ -68,8 +75,19 @@ export class CustomerListComponent implements OnInit {
     });
   }
   search(){
-    console.log('search', this.searchForm.value);
+    this.isLoading = true;
+    const { searchDep, searchName, searchSkill } = this.searchForm.value;
+    const searchUser = {
+      departmentId: searchDep,
+      fullname : searchName,
+      skillId: searchSkill
+    };
+    console.log('searchUser', searchUser);
+    setTimeout(() => {
+      this.userService.getSearch(searchUser).subscribe(data => {
+        this.isLoading = false;
+        this.dataSource = data;
+      });
+    }, 2000);
   }
-
-  
 }

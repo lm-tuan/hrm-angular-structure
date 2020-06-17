@@ -35,8 +35,11 @@
               <mat-form-field appearance="fill">
                 <mat-label>Skills</mat-label>
                 <mat-select formControlName="searchSkill">
-                  <mat-option value="option">Option1</mat-option>
-                  <mat-option value="option">Option2</mat-option>
+                  <div *ngFor=" let s of skills;">
+                    <mat-option [value]="s.skill_id">
+                      {{s.name}}
+                    </mat-option>
+                  </div>
                 </mat-select>
               </mat-form-field>
               <button class="button-icon" mat-raised-button color="primary">
