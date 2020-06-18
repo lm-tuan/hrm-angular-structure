@@ -85,7 +85,6 @@ export class EditUserComponent implements OnInit {
       birthday: moment(birthday).format('YYYY-MM-DD'),
       start_date: moment(startDate).format('YYYY-MM-DD')
     };
-    console.log('ssd');
 
     this.userService.update(id, profile).subscribe((data: any) => {
       const ps = {
@@ -95,21 +94,17 @@ export class EditUserComponent implements OnInit {
       };
       // profileSkill not data
       if (data.profileSkill.length === 0) {
-        console.log('ps', ps);
         this.profileSkillService.create(ps).subscribe(p => {
           this.router.navigate(['employee']);
         });
       } else {
-        const ids = [];
-        data.profileSkill.forEach(e => {
-          ids.push(e.id_profile_skill);
+        this.profileSkillService.delete(data.profile_id).subscribe((data: any) => {
+          if (data.status === 200 && data.isDelete === 1) {
+            this.profileSkillService.create(ps).subscribe(p => {
+              this.router.navigate(['employee']);
+            });
+          }
         });
-        console.log('ids', ids);
-        console.log('ps', ps);
-        this.profileSkillService.update(ids, ps).subscribe(p => {
-          this.router.navigate(['employee']);
-        });
-
       }
     });
   }
