@@ -21,6 +21,7 @@ export class EditUserComponent implements OnInit {
   skill: any;
   skills: any;
   nameSkills: any;
+  nameLevels: any;
   testgender = [1, 0];
   constructor(
     private formBuilder: FormBuilder,
@@ -35,9 +36,14 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.skillService.getAll().subscribe(data => {
-      this.nameSkills = data;
+    zip(
+      this.skillService.getAll(),
+      this.levelSkillService.getAll()
+    ).subscribe( data => {
+      this.nameSkills = data[0];
+      this.nameLevels = data[1];
     });
+
     this.createForm();
     this.fetchDataById();
   }
@@ -60,10 +66,13 @@ export class EditUserComponent implements OnInit {
   }
   edit() {
     const { fullName, address, startDate, idCard, email, phone, birthday, gender, position } = this.editForm.value;
-    const skillName = this.editSkillForm.value.skills[0].skill;
-    const levelid = this.editSkillForm.value.skills[0].level;
+    const skillIds = [];
+    const levelIds = [];
+    this.editSkillForm.value.skills?.forEach(item => {
+      skillIds.push(item.skill);
+      levelIds.push(item.level);
+    });
     const id = this.route.snapshot.params.id;
-    console.log('skill-id', skillName);
     const profile = {
       fullName,
       address,
@@ -79,18 +88,24 @@ export class EditUserComponent implements OnInit {
 
     this.userService.update(id, profile).subscribe((data: any) => {
       const ps = {
-        level_id: levelid,
+        level_ids: levelIds,
         profile_id: data.profile_id,
-        skill_id: skillName
+        skill_ids: skillIds
       };
       // profileSkill not data
       if (data.profileSkill.length === 0) {
+        console.log('ps', ps);
         this.profileSkillService.create(ps).subscribe(p => {
           this.router.navigate(['employee']);
         });
       } else {
-        const idProfileSkill = data.profileSkill[0].id_profile_skill;
-        this.profileSkillService.update(idProfileSkill, ps).subscribe(p => {
+        const ids = [];
+        data.profileSkill.forEach(e => {
+          ids.push(e.id_profile_skill);
+        });
+        console.log('ids', ids );
+        console.log('ps', ps );
+        this.profileSkillService.update(ids, ps).subscribe(p => {
           this.router.navigate(['employee']);
         });
 

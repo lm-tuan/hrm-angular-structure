@@ -43,7 +43,6 @@ export class CustomerListComponent implements OnInit {
         this.departmentService.getAll()
       ).subscribe(data => {
         console.log('data', data);
-        
         this.skills = data[0];
         this.dataSource = data[1];
         this.departments = data[2];
