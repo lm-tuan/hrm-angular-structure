@@ -30,6 +30,7 @@ import { SkillService } from './core/service/skillService';
 import { LevelSkillService } from './core/service/LevelSkillService';
 import { ProfileSkillService } from './core/service/ProfileSkillService';
 import { UsersModule } from './modules/user/user-list/user-list.module';
+import { DepartmentService } from './core/service/departmentService';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +65,7 @@ import { UsersModule } from './modules/user/user-list/user-list.module';
     SkillService,
     LevelSkillService,
     ProfileSkillService,
+    DepartmentService,
     authInterceptorProviders
   ],
   bootstrap: [AppComponent]

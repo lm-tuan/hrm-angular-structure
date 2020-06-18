@@ -19,6 +19,9 @@ export class EditUserComponent implements OnInit {
   editSkillForm: FormGroup;
   user: any;
   skill: any;
+  skills: any;
+  nameSkills: any;
+  nameLevels: any;
   testgender = [1, 0];
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +36,15 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    zip(
+      this.skillService.getAll(),
+      this.levelSkillService.getAll()
+    ).subscribe(data => {
+      console.log('data', data);
+      this.nameSkills = data[0];
+      this.nameLevels = data[1];
+    });
+
     this.createForm();
     this.fetchDataById();
   }
@@ -55,8 +67,12 @@ export class EditUserComponent implements OnInit {
   }
   edit() {
     const { fullName, address, startDate, idCard, email, phone, birthday, gender, position } = this.editForm.value;
-    const skillName = this.editSkillForm.value.skills[0].skill;
-    const levelid = this.editSkillForm.value.skills[0].level;
+    const skillIds = [];
+    const levelIds = [];
+    this.editSkillForm.value.skills?.forEach(item => {
+      skillIds.push(item.skill);
+      levelIds.push(item.level);
+    });
     const id = this.route.snapshot.params.id;
     const profile = {
       fullName,
@@ -69,33 +85,26 @@ export class EditUserComponent implements OnInit {
       birthday: moment(birthday).format('YYYY-MM-DD'),
       start_date: moment(startDate).format('YYYY-MM-DD')
     };
-    const skill = {
-      name: skillName
-    };
 
     this.userService.update(id, profile).subscribe((data: any) => {
-      console.log('data', data);
-         // profileSkill not data
-      if(data.profileSkill.length === 0) {
-        // insert skill
-        this.skillService.create(skill).subscribe((s: any) => {
-          const ps = {
-            level_id: levelid,
-            profile_id: data.profile_id,
-            skill_id: s.skill_id
-          };
-          this.profileSkillService.create(ps).subscribe(p => {
-            this.router.navigate(['employee']);
-          });
-
-        });
-
-      }else {
-        // update skill
-        // update profileSkill
-        this.skillService.update(data.profileSkill[0].skill.skill_id, skill).subscribe(ups => {
+      const ps = {
+        level_ids: levelIds,
+        profile_id: data.profile_id,
+        skill_ids: skillIds
+      };
+      // profileSkill not data
+      if (data.profileSkill.length === 0) {
+        this.profileSkillService.create(ps).subscribe(p => {
           this.router.navigate(['employee']);
-        })
+        });
+      } else {
+        this.profileSkillService.delete(data.profile_id).subscribe((data: any) => {
+          if (data.status === 200 && data.isDelete === 1) {
+            this.profileSkillService.create(ps).subscribe(p => {
+              this.router.navigate(['employee']);
+            });
+          }
+        });
       }
     });
   }
@@ -105,12 +114,13 @@ export class EditUserComponent implements OnInit {
     const id = this.route.snapshot.params.id;
     this.userService.get(id).subscribe((data: any) => {
       this.skill = data;
+
       if (data.profileSkill.length === 0) {
-        this.addSkill('', 1, 0);
+        this.addSkill(0, 0, 0);
       } else {
         // this.skills = data.profileSkill.length;
         data.profileSkill.forEach(item => {
-          this.addSkill(item.skill.name, item.level.name, 0);
+          this.addSkill(item.skill.skill_id, item.level.level_id, 0);
         });
       }
     })
@@ -121,7 +131,7 @@ export class EditUserComponent implements OnInit {
 
   }
 
-  addSkill(skillId = '', levelId = 1, empskillId = 0) {
+  addSkill(skillId = 0, levelId = 0, empskillId = 0) {
     const skill = this.formBuilder.group({
       skill: [skillId],
       level: [levelId],

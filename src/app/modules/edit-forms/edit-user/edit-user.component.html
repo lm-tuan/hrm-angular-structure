@@ -97,7 +97,7 @@
                   <div fxFlex fxLayout="row" fxLayout.lt-md="column">
                       <div fxFlexFill>
                         <mat-form-field style="width: 100%;">
-                        <mat-label>Bộ phận</mat-label>
+                        <mat-label>Vị trí</mat-label>
                         <mat-select formControlName="position" [(ngModel)]="user.position" >
                           <mat-option value="DEV">
                             DEV 
@@ -145,28 +145,29 @@
             </mat-form-field> -->
             <div formArrayName="skills">
         
-                <div *ngFor="let skill of skillForms.controls; let i=index" [formGroupName]="i">
-        
-        
-                    <mat-form-field class="xs">
-                        <input matInput placeholder="skill" formControlName="skill">
-                    </mat-form-field>
+                <div *ngFor="let skill of skillForms.controls; let i=index;" [formGroupName]="i">
+                  <mat-form-field >
+                    <mat-label>Skill</mat-label>
+                    <mat-select formControlName="skill" name="skill">
+                      <div *ngFor="let s of nameSkills; ">
+                        <mat-option [value]="s.skill_id">
+                          {{s.name}}
+                        </mat-option>
+                      </div>
+                    </mat-select>
+                  </mat-form-field>
         
                     <mat-form-field class="custom-level">
                         <mat-label>Level</mat-label>
-                        <mat-select formControlName="level" >
-                          <mat-option value= "1">
-                            1
-                          </mat-option>
-                          <mat-option value= "2">
-                            2
-                          </mat-option>
-                          <mat-option value= "3">
-                            3
-                          </mat-option>
+                        <mat-select formControlName="level">
+                          <div *ngFor="let l of nameLevels; ">
+                            <mat-option [value]="l.level_id">
+                              {{l.name}}
+                            </mat-option>
+                          </div>
                         </mat-select>
                       </mat-form-field>
-        
+                     
                     <button
                     mat-mini-fab
                     color="warn"
