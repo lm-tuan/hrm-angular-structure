@@ -40,6 +40,7 @@ export class EditUserComponent implements OnInit {
       this.skillService.getAll(),
       this.levelSkillService.getAll()
     ).subscribe(data => {
+      console.log('data', data);
       this.nameSkills = data[0];
       this.nameLevels = data[1];
     });
@@ -120,7 +121,6 @@ export class EditUserComponent implements OnInit {
       this.skill = data;
 
       if (data.profileSkill.length === 0) {
-        console.log('sdfdsf');
         this.addSkill(0, 0, 0);
       } else {
         // this.skills = data.profileSkill.length;

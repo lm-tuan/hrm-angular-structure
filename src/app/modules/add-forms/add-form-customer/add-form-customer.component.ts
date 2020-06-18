@@ -21,6 +21,8 @@ export class AddFormCustomerComponent implements OnInit {
   levels: any;
   isLoading = false;
   skills: any;
+  nameSkills;
+  nameLevels;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -34,11 +36,15 @@ export class AddFormCustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.skillService.getAll().subscribe(skills => {
-      this.skills = skills;
+    zip(
+      this.skillService.getAll(),
+      this.levelSkillService.getAll()
+    ).subscribe(data => {
+      this.nameSkills = data[0];
+      this.nameLevels = data[1];
     });
     this.createForm();
-    this.addSkill('', 1, 0);
+    this.addSkill(0, 0, 0);
   }
   private buildForm(): void {
     this.addForm = this.formBuilder.group({
@@ -68,22 +74,22 @@ export class AddFormCustomerComponent implements OnInit {
       birthday: moment(birthday).format('YYYY-MM-DD')
     };
 
-    // Data form skill
-    const skillName = this.addSkillForm.value.skills[0].skill;
-    const levelid = this.addSkillForm.value.skills[0].level;
     this.isLoading = true;
-    const skill = {
-      name: skillName
-    };
+    const skillIds = [];
+    const levelIds = [];
+    this.addSkillForm.value.skills?.forEach(item => {
+      skillIds.push(item.skill);
+      levelIds.push(item.level);
+    });
+
     zip(
       this.userService.create(profile),
-      this.skillService.create(skill)
     ).subscribe((data: any) => {
       console.log('data', data);
       const ps = {
-        level_id: levelid,
+        level_ids: levelIds,
         profile_id: data[0].profile_id,
-        skill_id: data[1].skill_id
+        skill_ids: skillIds
       };
       setTimeout(() => {
         this.profileSkillService.create(ps).subscribe( sp => {
@@ -104,7 +110,7 @@ export class AddFormCustomerComponent implements OnInit {
 
   }
 
-  addSkill(skillId = '', levelId = 1, empskillId = 0) {
+  addSkill(skillId = 0, levelId = 0, empskillId = 0) {
     const skill = this.formBuilder.group({
       skill: [skillId],
       level: [levelId],

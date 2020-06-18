@@ -135,27 +135,23 @@
 
 
               <mat-form-field class="xs" >
-                <mat-select formControlName="level">
-                  <div *ngFor=" let s of skills;">
-                  <mat-option value="s.skill_id">
-                    {{s.name}}
-                  </mat-option>
-                </div>
+                <mat-select formControlName="skill">
+                  <div *ngFor="let s of nameSkills; ">
+                    <mat-option [value]="s.skill_id">
+                      {{s.name}}
+                    </mat-option>
+                  </div>
                 </mat-select>
               </mat-form-field>
 
               <mat-form-field class="custom-level">
                 <mat-label>Level</mat-label>
                 <mat-select formControlName="level">
-                  <mat-option value="1">
-                    1
-                  </mat-option>
-                  <mat-option value="2">
-                    2
-                  </mat-option>
-                  <mat-option value="3">
-                    3
-                  </mat-option>
+                  <div *ngFor="let l of nameLevels; ">
+                    <mat-option [value]="l.level_id">
+                      {{l.name}}
+                    </mat-option>
+                  </div>
                 </mat-select>
               </mat-form-field>
 
