@@ -39,7 +39,7 @@ export class EditUserComponent implements OnInit {
     zip(
       this.skillService.getAll(),
       this.levelSkillService.getAll()
-    ).subscribe( data => {
+    ).subscribe(data => {
       this.nameSkills = data[0];
       this.nameLevels = data[1];
     });
@@ -103,8 +103,8 @@ export class EditUserComponent implements OnInit {
         data.profileSkill.forEach(e => {
           ids.push(e.id_profile_skill);
         });
-        console.log('ids', ids );
-        console.log('ps', ps );
+        console.log('ids', ids);
+        console.log('ps', ps);
         this.profileSkillService.update(ids, ps).subscribe(p => {
           this.router.navigate(['employee']);
         });
@@ -118,12 +118,14 @@ export class EditUserComponent implements OnInit {
     const id = this.route.snapshot.params.id;
     this.userService.get(id).subscribe((data: any) => {
       this.skill = data;
+
       if (data.profileSkill.length === 0) {
-        this.addSkill('', 1, 0);
+        console.log('sdfdsf');
+        this.addSkill(0, 0, 0);
       } else {
         // this.skills = data.profileSkill.length;
         data.profileSkill.forEach(item => {
-          this.addSkill(item.skill.name, item.level.name, 0);
+          this.addSkill(item.skill.skill_id, item.level.level_id, 0);
         });
       }
     })
@@ -134,7 +136,7 @@ export class EditUserComponent implements OnInit {
 
   }
 
-  addSkill(skillId = '', levelId = 1, empskillId = 0) {
+  addSkill(skillId = 0, levelId = 0, empskillId = 0) {
     const skill = this.formBuilder.group({
       skill: [skillId],
       level: [levelId],

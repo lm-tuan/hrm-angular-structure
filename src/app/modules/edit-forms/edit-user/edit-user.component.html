@@ -145,10 +145,10 @@
             </mat-form-field> -->
             <div formArrayName="skills">
         
-                <div *ngFor="let skill of skillForms.controls; let i=index" [formGroupName]="i">
+                <div *ngFor="let skill of skillForms.controls; let i=index;" [formGroupName]="i">
                   <mat-form-field >
                     <mat-label>Skill</mat-label>
-                    <mat-select formControlName="skill" >
+                    <mat-select formControlName="skill" name="skill">
                       <div *ngFor="let s of nameSkills; ">
                         <mat-option [value]="s.skill_id">
                           {{s.name}}
@@ -159,7 +159,7 @@
         
                     <mat-form-field class="custom-level">
                         <mat-label>Level</mat-label>
-                        <mat-select formControlName="level" >
+                        <mat-select formControlName="level">
                           <div *ngFor="let l of nameLevels; ">
                             <mat-option [value]="l.level_id">
                               {{l.name}}
@@ -167,7 +167,7 @@
                           </div>
                         </mat-select>
                       </mat-form-field>
-        
+                     
                     <button
                     mat-mini-fab
                     color="warn"

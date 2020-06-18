@@ -24,12 +24,10 @@ export class ProfileSkillService {
   }
 
   update(ids, data) {
-    let url = "";
-    ids.forEach(id => {
-     url += `ids=${id}&`;
+    let url = '';
+    ids.forEach(id => { url += `ids=${id}&`;
     });
     url = url.substring(0, url.length - 1);
-    console.log(`${baseUrl}/update?${url}`);
     return this.http.put(`${baseUrl}/update?${url}`, data);
   }
 
