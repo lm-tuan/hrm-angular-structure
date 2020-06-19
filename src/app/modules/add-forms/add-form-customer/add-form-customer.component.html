@@ -135,7 +135,7 @@
 
 
               <mat-form-field class="xs" >
-                <mat-select formControlName="skill">
+                <mat-select formControlName="skill" (selectionChange)="onChange($event)" >
                   <div *ngFor="let s of nameSkills; ">
                     <mat-option [value]="s.skill_id">
                       {{s.name}}

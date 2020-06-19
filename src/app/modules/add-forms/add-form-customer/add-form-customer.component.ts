@@ -23,6 +23,7 @@ export class AddFormCustomerComponent implements OnInit {
   skills: any;
   nameSkills;
   nameLevels;
+  skillUsed = [];
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -73,7 +74,7 @@ export class AddFormCustomerComponent implements OnInit {
       start_date: moment(startDate).format('YYYY-MM-DD'),
       birthday: moment(birthday).format('YYYY-MM-DD')
     };
-
+    
     this.isLoading = true;
     const skillIds = [];
     const levelIds = [];
@@ -134,5 +135,13 @@ export class AddFormCustomerComponent implements OnInit {
     return this.addForm.controls[controlName].hasError(errorName);
   }
 
+  onChange(event) {
+    let listskill = [...this.nameSkills];
+    // this.skillUsed.push(event.value);
+    const lst = listskill.filter(e => e.skill_id !== event.value );
+    this.skillUsed = lst;
+    console.log(lst);
+    listskill = [lst];
+  }
 }
 
