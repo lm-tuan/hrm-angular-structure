@@ -90,12 +90,16 @@ export class CustomerListComponent implements OnInit {
       fullname : searchName,
       skillId: searchSkill
     };
-    console.log('searchUser', searchUser);
-    setTimeout(() => {
-      this.userService.getSearch(searchUser).subscribe(data => {
-        this.isLoading = false;
-        this.dataSource = data;
-      });
-    }, 2000);
+    if(!searchDep && !searchName && !searchSkill  ){
+      this.fetchData();
+    }else{
+      console.log('searchUser', searchUser);
+      setTimeout(() => {
+        this.userService.getSearch(searchUser).subscribe(data => {
+          this.isLoading = false;
+          this.dataSource = data;
+        });
+      }, 2000);
+    }
   }
 }
