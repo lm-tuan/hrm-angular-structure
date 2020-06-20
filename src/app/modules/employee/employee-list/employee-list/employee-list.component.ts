@@ -103,6 +103,8 @@ export class EmployeeListComponent implements OnInit {
         this.userService.getSearch(searchUser).subscribe(data => {
           this.isLoading = false;
           this.dataSource = data;
+          this.dataSource = new MatTableDataSource<any>(this.dataSource);
+          this.dataSource.paginator = this.paginator;
         });
       }, 2000);
     }
@@ -117,7 +119,6 @@ export class EmployeeListComponent implements OnInit {
   isAllSelected() {
     const numSelected = this.selection.selected?.length;
     const numRows = this.dataSource?.filteredData.length;
-    console.log(numSelected, numRows);
     return numSelected === numRows;
   }
    /** Selects all rows if they are not all selected; otherwise clear selection. */

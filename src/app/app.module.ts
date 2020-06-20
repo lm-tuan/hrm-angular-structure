@@ -46,7 +46,6 @@ import { EmployeeListModule } from './modules/employee/employee-list/employee-li
     EmployeeEditModule,
     EmployeeListModule,
     SharedModule,
-    // skill
     // user
     UsersModule,
     AppRoutingModule,
