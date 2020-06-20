@@ -31,6 +31,8 @@ import { LevelSkillService } from './core/service/LevelSkillService';
 import { ProfileSkillService } from './core/service/ProfileSkillService';
 import { UsersModule } from './modules/user/user-list/user-list.module';
 import { DepartmentService } from './core/service/departmentService';
+import { EmployeeAddModule } from './modules/employee/employee-add/employee-add.module';
+import { EmployeeEditModule } from './modules/employee/employee-edit/employee-edit.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +49,8 @@ import { DepartmentService } from './core/service/departmentService';
     AuthModule,
     // employyee
     CustomerModule,
+    EmployeeAddModule,
+    EmployeeEditModule,
     AddFormModule,
     EditFormModule,
     SharedModule,

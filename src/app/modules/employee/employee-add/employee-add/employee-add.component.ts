@@ -9,11 +9,11 @@ import { zip } from 'rxjs';
 import { LevelSkillService } from 'src/app/core/service/LevelSkillService';
 import { ProfileSkillService } from 'src/app/core/service/ProfileSkillService';
 @Component({
-  selector: 'app-add-form-customer',
-  templateUrl: './add-form-customer.component.html',
-  styleUrls: ['./add-form-customer.component.scss']
+  selector: 'app-add-employee-add',
+  templateUrl: './employee-add.component.html',
+  styleUrls: ['./employee-add.component.scss']
 })
-export class AddFormCustomerComponent implements OnInit {
+export class EmployeeAddComponent implements OnInit {
   addForm: FormGroup;
   addSkillForm: FormGroup;
   user: any;
@@ -130,7 +130,7 @@ export class AddFormCustomerComponent implements OnInit {
     });
   }
 
- hasError = (controlName: string, errorName: string) =>{
+ hasError = (controlName: string, errorName: string) => {
     return this.addForm.controls[controlName].hasError(errorName);
   }
 

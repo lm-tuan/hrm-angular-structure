@@ -23,12 +23,12 @@ const routes: Routes = [
       {
         path: 'employee/add',
         loadChildren: () =>
-        import('./modules/add-forms/add-forms.module').then(m => m.AddFormModule)
+        import('./modules/employee/employee-add/employee-add.module').then(m => m.EmployeeAddModule)
       },
       {
         path: 'employee/edit/:id',
         loadChildren: () =>
-        import('./modules/edit-forms/edit-forms.module').then(m => m.EditFormModule)
+        import('./modules/employee/employee-edit/employee-edit.module').then(m => m.EmployeeEditModule)
       },
       {
         path: 'skills',

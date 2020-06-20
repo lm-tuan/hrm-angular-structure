@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const baseUrl = 'http://192.168.4.201:8080/api/department';
-// const baseUrl = 'http://localhost:8080/api/department';
+// const baseUrl = 'http://192.168.4.201:8080/api/department';
+const baseUrl = 'http://localhost:8080/api/department';
 
 @Injectable({ providedIn: 'root'})
 export class DepartmentService {

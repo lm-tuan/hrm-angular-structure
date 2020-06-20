@@ -1,0 +1,131 @@
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    .content {
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .app-name {
+            margin-top: 0px;
+            padding-bottom: 10px;
+            font-size: 32px;
+        }
+        .login-form {
+            padding: 40px;
+            background: #fff;
+            width: 500px;
+            flex-direction: column;
+            box-shadow: 0 0 10px #ddd;
+            input:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0 30px white inset;
+            }
+        }
+    }
+  
+    &:after {
+        content: '';
+       //  background: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 50%;
+        right: 0;
+    }
+    &:before {
+        content: '';
+        // background: #3f51b5;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+  }
+  .text-center {
+    text-align: center;
+  }
+  .w-100 {
+    width: 100%;
+  }
+  .custom-gender {
+    // margin-left: 20%;
+    margin-left: 9%;
+  }
+  
+  .progress-custom{
+    position: absolute;
+    top: 38%;
+    left: 47%;
+    z-index: 99;
+  }
+  
+  .mat-card-custom{
+    position: relative;
+  }
+  
+  
+  
+  //css
+  
+  .mt-10{
+    margin-top: 20px;
+  }
+  
+  example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  width: 120px;
+  }
+  
+  .example-button-row {
+  display: table-cell;
+  }
+  
+  .example-button-row button {
+  display: table-cell;
+  margin-right: 8px;
+  }
+  
+  .example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+  }
+  
+  .example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  }
+  
+  .fxLayout-custom{
+    width: 90%;
+    height: 90%;
+    margin: auto;
+  }
+  
+  .progress-custom{
+  position: absolute;
+  top: 90%;
+  left:50%;
+  z-index: 99;
+  }
+  .mat-card{
+  margin-top: 10px;
+  }
+  
+  .custom-level{
+    margin-left: 20px;
+  }
+  .group-skill{
+    margin-top: 56px !important;
+  }
+  .custom-mr{
+    margin-top: 65px;
+  }
+  
