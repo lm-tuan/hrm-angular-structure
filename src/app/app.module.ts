@@ -14,7 +14,6 @@ import { TutorialService } from './core/service/tutorialService';
 import { HttpClientModule } from '@angular/common/http';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { NavComponent } from './layout/nav/nav.component';
-import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './core/service/authService';
 import { TokenStorageService } from './core/service/token-storage.service';
@@ -35,7 +34,6 @@ import { EmployeeListModule } from './modules/employee/employee-list/employee-li
     AuthLayoutComponent,
     ContentLayoutComponent,
     NavComponent,
-    CustomerLayoutComponent,
   ],
   imports: [
     FormsModule,
