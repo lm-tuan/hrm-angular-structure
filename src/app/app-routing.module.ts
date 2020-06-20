@@ -13,7 +13,7 @@ const routes: Routes = [
       {
         path: 'employee',
         loadChildren: () =>
-        import('./modules/customers/customer.module').then(m => m.CustomerModule)
+        import('./modules/employee/employee-list/employee-list.module').then(m => m.EmployeeListModule)
       },
       {
         path: 'employee/detail/:id',

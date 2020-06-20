@@ -33,6 +33,7 @@ import { UsersModule } from './modules/user/user-list/user-list.module';
 import { DepartmentService } from './core/service/departmentService';
 import { EmployeeAddModule } from './modules/employee/employee-add/employee-add.module';
 import { EmployeeEditModule } from './modules/employee/employee-edit/employee-edit.module';
+import { EmployeeListModule } from './modules/employee/employee-list/employee-list.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { EmployeeEditModule } from './modules/employee/employee-edit/employee-ed
     CustomerModule,
     EmployeeAddModule,
     EmployeeEditModule,
+    EmployeeListModule,
     AddFormModule,
     EditFormModule,
     SharedModule,
