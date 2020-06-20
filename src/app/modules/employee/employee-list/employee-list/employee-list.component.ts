@@ -20,8 +20,8 @@ export class EmployeeListComponent implements OnInit {
   searchForm: FormGroup;
   skills;
   departments;
-  selection = new SelectionModel<any>(true, []);
   dataSource;
+  selection = new SelectionModel<any>(true, []);
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(
     private router: Router,
@@ -116,13 +116,15 @@ export class EmployeeListComponent implements OnInit {
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected?.length;
-    const numRows = this.dataSource?.length;
+    const numRows = this.dataSource?.filteredData.length;
+    console.log(numSelected, numRows);
     return numSelected === numRows;
   }
    /** Selects all rows if they are not all selected; otherwise clear selection. */
    masterToggle() {
+    console.log('sdsds');
     this.isAllSelected() ?
         this.selection.clear() :
-        this.dataSource.forEach(row => this.selection.select(row));
+        this.dataSource.filteredData.forEach(row => this.selection.select(row));
   }
 }
