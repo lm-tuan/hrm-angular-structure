@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -6,6 +6,8 @@ import { zip } from 'rxjs';
 import { DepartmentService } from 'src/app/core/service/departmentService';
 import { UserService } from 'src/app/core/service/user.service';
 import { SkillService } from 'src/app/core/service/skillService';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,12 +15,14 @@ import { SkillService } from 'src/app/core/service/skillService';
   styleUrls: ['./employee-list.component.scss']
 })
 export class EmployeeListComponent implements OnInit {
-  displayedColumns: string[] = ['No', 'Full name', 'Mã nhân viên', 'Phone', 'Bộ phận', 'Skill', 'Detail'];
-  dataSource;
+  displayedColumns: string[] = ['No', 'Full name', 'Mã nhân viên', 'Phone', 'Bộ phận', 'Skill', 'Detail', 'select'];
   isLoading = false;
   searchForm: FormGroup;
   skills;
   departments;
+  selection = new SelectionModel<any>(true, []);
+  dataSource;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(
     private router: Router,
     private userService: UserService,
@@ -42,9 +46,10 @@ export class EmployeeListComponent implements OnInit {
         this.userService.getAll(),
         this.departmentService.getAll()
       ).subscribe(data => {
-        console.log('data', data);
         this.skills = data[0];
         this.dataSource = data[1];
+        this.dataSource = new MatTableDataSource<any>(this.dataSource);
+        this.dataSource.paginator = this.paginator;
         this.departments = data[2];
         this.isLoading = false;
       }, err => {
@@ -101,5 +106,23 @@ export class EmployeeListComponent implements OnInit {
         });
       }, 2000);
     }
+  }
+  checkboxLabel(row?): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected?.length;
+    const numRows = this.dataSource?.length;
+    return numSelected === numRows;
+  }
+   /** Selects all rows if they are not all selected; otherwise clear selection. */
+   masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.forEach(row => this.selection.select(row));
   }
 }
