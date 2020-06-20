@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { UserService } from 'src/app/core/service/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { SkillService } from 'src/app/core/service/skillService';
 import { zip } from 'rxjs';
 import { DepartmentService } from 'src/app/core/service/departmentService';
+import { UserService } from 'src/app/core/service/user.service';
+import { SkillService } from 'src/app/core/service/skillService';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,7 +13,7 @@ import { DepartmentService } from 'src/app/core/service/departmentService';
   styleUrls: ['./employee-list.component.scss']
 })
 export class EmployeeListComponent implements OnInit {
-  displayedColumns: string[] = ['No', 'Full name', 'Birthday', 'Gender', 'Mã nhân viên', 'Phone', 'Email', 'Bộ phận', 'Skill', 'Detail'];
+  displayedColumns: string[] = ['No', 'Full name', 'Mã nhân viên', 'Phone', 'Bộ phận', 'Skill', 'Detail'];
   dataSource;
   isLoading = false;
   searchForm: FormGroup;
