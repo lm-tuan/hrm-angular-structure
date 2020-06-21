@@ -2,19 +2,20 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/shared/material.module';
-import {DetailUserRoutingModule } from './detail.routing';
-import { DetailUserComponent } from './detail-user/detail-user.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { EmployeeListRoutingModule } from './employee-list.routing';
 
 
 @NgModule({
     declarations: [
-    DetailUserComponent],
+        EmployeeListComponent,
+    ],
     imports: [
         SharedModule,
-        DetailUserRoutingModule,
+        EmployeeListRoutingModule,
         MaterialModule,
     ],
     exports: [],
     providers: [],
 })
-export class DetailUserModule {}
+export class EmployeeListModule {}

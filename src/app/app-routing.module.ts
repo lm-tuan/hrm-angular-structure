@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
-import { CustomerLayoutComponent } from './layout/customer-layout/customer-layout.component';
-import { EditUserComponent } from './modules/edit-forms/edit-user/edit-user.component';
 
 const routes: Routes = [
   {
@@ -13,12 +11,7 @@ const routes: Routes = [
       {
         path: 'employee',
         loadChildren: () =>
-        import('./modules/customers/customer.module').then(m => m.CustomerModule)
-      },
-      {
-        path: 'employee/detail/:id',
-        loadChildren: () =>
-        import('./modules/detail/detail.module').then(m => m.DetailUserModule)
+        import('./modules/employee/employee-list/employee-list.module').then(m => m.EmployeeListModule)
       },
       {
         path: 'employee/add',
@@ -29,17 +22,6 @@ const routes: Routes = [
         path: 'employee/edit/:id',
         loadChildren: () =>
         import('./modules/employee/employee-edit/employee-edit.module').then(m => m.EmployeeEditModule)
-      },
-      {
-        path: 'skills',
-        loadChildren: () =>
-        import('./modules/skill/skill-list/skill-list.module').then(m => m.SkillsModule)
-      },
-      // skill
-      {
-        path: 'skills/detail/:id',
-        loadChildren: () =>
-        import('./modules/skill/skill-add/skill-add.module').then(m => m.SkillAddModule)
       },
       // user
       {
