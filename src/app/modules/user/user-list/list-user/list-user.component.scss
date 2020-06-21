@@ -1,43 +1,79 @@
-table {
-    width: 100%;
-}
 
-th.mat-sort-header-sorted {
-    color: black;
-}
-.custom-button{
-    margin-left: 5px;
-    width: 30px;
-    height: 30px;
-}
-mat-icon{
-    font-size: 16px;
-}
-mat-list-item{
-    font-size: 12px;
-    line-height: 5px;
-}
-.mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
-    height: 20px;
-    font-size: 12px;
-}
-
-.progress-custom{
+  .progress-custom{
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 38%;
+    left: 47%;
     z-index: 99;
   }
-.group-search{
-    display: flex;
+  
+  .mat-card-custom{
+    position: relative;
+  }
+  
+  
+  
+  //css
+  
+  .mt-10{
+    margin-top: 20px;
+  }
+  
+  example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  width: 120px;
+  }
+  
+  .example-button-row {
+  display: table-cell;
+  }
+  
+  .example-button-row button {
+  display: table-cell;
+  margin-right: 8px;
+  }
+  
+  .example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+  }
+  
+  .example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  }
+  
+  .fxLayout-custom{
+    width: 90%;
+    height: 90%;
+    margin: auto;
+  }
+  
+  .progress-custom{
+  position: absolute;
+  top: 90%;
+  left:50%;
+  z-index: 99;
+  }
+  .mat-card{
+  margin-top: 10px;
+  }
+  
+  .custom-level{
     margin-left: 20px;
-}
-.group-parent{
-    display: flex;
-}
-custom-mat-card{
-    margin-left: 12px;
-}
-.item-2{
-    display: flex;
-}
+  }
+  .group-skill{
+    margin-top: 56px !important;
+  }
+  .custom-mr{
+    margin-top: 65px;
+  }
+  .fxLayout-custom{
+      width: 100%;
+  }
+  .mat-table.cdk-table{
+    width: 100%;
+  }

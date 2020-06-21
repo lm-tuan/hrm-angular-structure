@@ -1,98 +1,91 @@
-<div class="container" fxLayout="row" fxLayoutAlign="center none">
-    <div fxFlex="95%">
-      <mat-spinner class="progress-custom" *ngIf="isLoading"></mat-spinner>
-      <mat-card>
-        <mat-card-content>
-          <h2>Employees</h2>
-          <div
-          class="container mt-20"
-          fxLayout
-          fxLayout.xs="column"
-          fxLayoutAlign="center"
-          fxLayoutGap="10px"
-          fxLayoutGap.xs="0"
-        >
-          <div class="item item-1" fxFlex="15%">
-            <button [routerLink]="['/employee/add']" mat-raised-button color="primary">+ Thêm nhân viên</button> 
-          </div>
-          <div class="item item-2" fxFlex="30%">
-          </div>
-          <div class="item item-3" fxFlex="30%">
-          </div>
-          <div class="item item-4" fxFlex="25%">
-          </div>
-          
-        </div>
-          <table mat-table [dataSource]="dataSource" matSort>
-            
-             <!-- Position Column -->
-             <ng-container matColumnDef="No">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-              <td mat-cell *matCellDef="let element"> {{element.profile_id}} </td>
-            </ng-container>
+<div
+  class="container mt-20"
+  fxLayout
+  fxLayout.xs="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="10px"
+  fxLayoutGap.xs="0"
+>
+  <div class="item item-1" fxFlex="5%"></div>
+  <div class="item item-2" fxFlex="5%" fxFlexOrder="3"></div>
+  <div class="item item-3" fxFlex></div>
+</div>
 
-            <!-- Position Column -->
-            <ng-container matColumnDef="Full name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Full name </th>
-              <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
-            </ng-container>
+<div
+  class="container mt-20"
+  fxLayout
+  fxLayout.xs="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="10px"
+  fxLayoutGap.xs="0"
+>
+  <div class="item item-1" fxFlex="5%"></div>
+  <div class="item item-2" fxFlex="5%" fxFlexOrder="3"></div>
+  <div class="item item-3" fxFlex>
+    <div fxLayout="column" class="fxLayout-custom">
+      <div class="mt-10" fxLayout="row" fxLayoutGap="20px" fxFlex>
+        <mat-card class="example-card" fxFlex="65">
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
           
-            <!-- Name Column -->
-            <ng-container matColumnDef="Birthday">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Birthday </th>
-              <td mat-cell *matCellDef="let element"> {{element.birthday}} </td>
-            </ng-container>
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element">
+                   <p *ngIf="status" >{{element.position}}</p>
+                   <form class="example-form" *ngIf="isEdit" >
+                    <mat-form-field class="example-full-width">
+                      <input matInput  value="Sushi">
+                    </mat-form-field>
+                  </form>
+                   </td>
+              </ng-container>
           
-            <!-- Weight Column -->
-            <ng-container matColumnDef="Gender">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-              <td mat-cell *matCellDef="let element"> {{element.gender ? "male" : "female"}} </td>
-            </ng-container>
-            <!-- Weight Column -->
-            <ng-container matColumnDef="Mã nhân viên">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Mã nhân viên </th>
-              <td mat-cell *matCellDef="let element"> {{element.idCard}} </td>
-            </ng-container>
-          
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="Phone">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
-              <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-            </ng-container>
-
-             <!-- Symbol Column -->
-             <ng-container matColumnDef="Email">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-              <td mat-cell *matCellDef="let element"> 
-                {{element.email}}
-                 </td>
-            </ng-container>
-
-              <!-- Skill Column -->
-              <ng-container matColumnDef="Skill">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Skill </th>
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
                 <td mat-cell *matCellDef="let element"> 
-                <mat-list role="list" *ngFor="let item of element.profileSkill">
-                  <mat-list-item role="listitem" style="text-transform:uppercase">
-                    {{item.skill.name}}
-                  </mat-list-item>
-                </mat-list>
+                  <p *ngIf="status">{{element.name}}</p>
+                  <form class="example-form" *ngIf="isEdit" >
+                    <mat-form-field class="example-full-width">
+                      <input matInput  value="Sushi">
+                    </mat-form-field>
+                  </form>
+                   </td>
+              </ng-container>
+          
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef> Weight </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <p *ngIf="status">{{element.weight}} </p>
+                  <form class="example-form" *ngIf="isEdit" >
+                    <mat-form-field class="example-full-width">
+                      <input matInput  value="Sushi">
+                    </mat-form-field>
+                  </form>
                 </td>
               </ng-container>
-
-             <!-- Symbol Column -->
-             <ng-container matColumnDef="Bộ phận">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Bộ phận </th>
-              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-            </ng-container>
+          
               <!-- Symbol Column -->
-              <ng-container matColumnDef="Detail">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Xem chi tiết </th>
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                <td mat-cell *matCellDef="let element">
+                  <p *ngIf="status">  {{element.symbol}}</p>
+                  <form class="example-form" *ngIf="isEdit" >
+                    <mat-form-field class="example-full-width">
+                      <input matInput  value="Sushi">
+                    </mat-form-field>
+                  </form>
+                   </td>
+              </ng-container>
+
+              
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
                 <td mat-cell *matCellDef="let element"> 
-                  <div class="example-button-container">
-                    <button class="custom-button" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-                      <mat-icon (click) = "onLinkDetail(element.profile_id)">description</mat-icon>
-                    </button>
+                  <div class="example-button-container" *ngIf="!isEdit">
                     <button class="custom-button" mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
                       <mat-icon (click)="onLinkEdit(element.profile_id)"  >edit</mat-icon>
                     </button>
@@ -100,14 +93,31 @@
                       <mat-icon (click)= "onDelete(element.profile_id)" >delete</mat-icon>
                     </button>
                   </div>
+                  <div class="example-button-container"  *ngIf="!status">
+                    <button class="custom-button" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                      <mat-icon (click)="onLinkEdit(element.profile_id)"  >save</mat-icon>
+                    </button>
+                    <button class="custom-button" color="default"  mat-mini-fab  aria-label="Example icon button with a plus one icon">
+                      <mat-icon (click)= "onDelete(element.profile_id)" >favorite
+                      </mat-icon>
+                    </button>
+                  </div>
                 </td>
               </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
           
-        </mat-card-content>
-      </mat-card>
-  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+        </mat-card>
+        <mat-card class="example-card" fxFlex="35">
+          2
+          </mat-card>
+      </div>
     </div>
   </div>
+</div>
+
+
