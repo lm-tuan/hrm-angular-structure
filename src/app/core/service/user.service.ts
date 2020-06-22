@@ -39,4 +39,13 @@ export class UserService {
   delete(id) {
     return this.http.delete(`${baseUrl}/delete/${id}`);
   }
+  deleteAll(ids) {
+    let url = '';
+    ids.forEach(id => {
+      url += `ids=${id}?`;
+    });
+    url = url.substring(url.length - 1, url.length);
+    console.log('url', url);
+    return this.http.get(`${baseUrl}/delete-all?${url}`);
+  }
 }

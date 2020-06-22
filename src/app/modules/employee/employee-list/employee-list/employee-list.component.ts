@@ -146,9 +146,9 @@ export class EmployeeListComponent implements OnInit {
       ];
     }
     console.log(this.ListChecked);
-    
+
   }
-  onChangeAll(event){
+  onChangeAll(event) {
     this.ListChecked = [];
     this.dataTemp.forEach(e => {
       this.ListChecked.push(e.profile_id)
@@ -157,7 +157,17 @@ export class EmployeeListComponent implements OnInit {
   }
 
   removeAll() {
-    console.log("toang rồi");
+    setTimeout(() => {
+      this.isLoading = true;
+      this.userService.deleteAll(this.ListChecked).subscribe((data: any) => {
+        if (data.staus === 200) {
+          this.isLoading = false;
+        }
+      }, err => {
+        console.log(err);
 
+      })
+      console.log("toang rồi");
+    }, 1000)
   }
 }
