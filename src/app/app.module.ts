@@ -28,6 +28,7 @@ import { EmployeeAddModule } from './modules/employee/employee-add/employee-add.
 import { EmployeeEditModule } from './modules/employee/employee-edit/employee-edit.module';
 import { EmployeeListModule } from './modules/employee/employee-list/employee-list.module';
 import { NavComponent } from './layout/nav/nav.component';
+import { EmployeeService } from './core/service/employeeService';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { NavComponent } from './layout/nav/nav.component';
     LevelSkillService,
     ProfileSkillService,
     DepartmentService,
+    EmployeeService,
     authInterceptorProviders
   ],
   bootstrap: [AppComponent]

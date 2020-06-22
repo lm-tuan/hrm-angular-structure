@@ -9,6 +9,7 @@ import { zip } from 'rxjs';
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { EmployeeService } from 'src/app/core/service/employeeService';
 
 @Component({
   selector: 'app-list-user',
@@ -17,127 +18,49 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ListUserComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'action'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['position', 'username', 'password', 'role', 'action'];
+  dataSource;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   addForm: FormGroup;
   addSkillForm: FormGroup;
-  user: any;
-  skill: any;
-  levels: any;
-  isLoading = false;
-  skills: any;
-  nameSkills;
-  nameLevels;
-  skillUsed = [];
   isEdit = false;
   status = true;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService,
-    private skillService: SkillService,
-    private levelSkillService: LevelSkillService,
-    private profileSkillService: ProfileSkillService,
+    private employeeService: EmployeeService,
   ) {
     this.buildForm();
   }
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
-    zip(
-      this.skillService.getAll(),
-      this.levelSkillService.getAll()
-    ).subscribe(data => {
-      this.nameSkills = data[0];
-      this.nameLevels = data[1];
-    });
-    this.createForm();
-    this.addSkill(0, 0, 0);
+    this.employeeService.getAll().subscribe(data => {
+      console.log(data)
+      this.dataSource = data;
+      this.dataSource = new MatTableDataSource<any>(this.dataSource);
+      this.dataSource.paginator = this.paginator;
+    }
+    );
   }
   private buildForm(): void {
     this.addForm = this.formBuilder.group({
-      fullName: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(5)]),
-      address: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]),
-      idCard: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      phone: new FormControl('', [Validators.required]),
-      startDate: new FormControl('', [Validators.required]),
-      birthday: new FormControl('', [Validators.required]),
-      gender: new FormControl('', [Validators.required]),
-      position: new FormControl('', [Validators.required])
+      username: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(5)]),
+      password: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]),
+      role: new FormControl('', []),
+
     });
   }
   add() {
     // Data form profile
-    const { fullName, address, startDate, idCard, email, phone, birthday, gender, position } = this.addForm.value;
+    const { username, password, role } = this.addForm.value;
     const profile = {
-      fullName,
-      address,
-      idCard,
-      email,
-      phone,
-      gender: Number(gender),
-      position,
-      start_date: moment(startDate).format('YYYY-MM-DD'),
-      birthday: moment(birthday).format('YYYY-MM-DD')
+      username,
+      password,
+      role,
     };
-    this.isLoading = true;
-    const skillIds = [];
-    const levelIds = [];
-    this.addSkillForm.value.skills?.forEach(item => {
-      skillIds.push(item.skill);
-      levelIds.push(item.level);
-    });
-
-    zip(
-      this.userService.create(profile),
-    ).subscribe((data: any) => {
-      console.log('data', data);
-      const ps = {
-        level_ids: levelIds,
-        profile_id: data[0].profile_id,
-        skill_ids: skillIds
-      };
-      setTimeout(() => {
-        this.profileSkillService.create(ps).subscribe( sp => {
-          if (sp) {
-            this.isLoading = false;
-            this.router.navigate(['employee']);
-          }
-        });
-      }, 2000);
-  }, erorr => {
-    console.log('err', erorr);
-  });
-
-  }
-
-  get skillForms() {
-    return this.addSkillForm.get('skills') as FormArray;
-
-  }
-
-  addSkill(skillId = 0, levelId = 0, empskillId = 0) {
-    const skill = this.formBuilder.group({
-      skill: [skillId],
-      level: [levelId],
-      empskill: [empskillId]
-    });
-
-    this.skillForms.push(skill);
-  }
-
-  deleteSkill(i) {
-    this.skillForms.removeAt(i);
-  }
-
-  createForm() {
-    this.addSkillForm = this.formBuilder.group({
-      skills: this.formBuilder.array([])
-    });
+    // this.isLoading = true;
   }
 
  hasError = (controlName: string, errorName: string) => {
@@ -154,9 +77,15 @@ export class ListUserComponent implements OnInit {
   onDelete(id){
 
   }
-  
+  onSave(id){
+    this.status =  true;
+    this.isEdit = false;
+  }
+  onClose(id){
+    this.status =  true;
+    this.isEdit = false;
+  }
 }
-
 
 export interface PeriodicElement {
   name: string;
