@@ -97,7 +97,6 @@ export class ListUserComponent implements OnInit {
         }
     }, err => {
       console.log(err);
-      
     })
    
   }
@@ -127,15 +126,16 @@ export class ListUserComponent implements OnInit {
 
   // On 
   onChange(event) {
-    const roles = <FormArray>this.interestFormGroup.get('interests') as FormArray;
+    // const roles = <FormArray>this.interestFormGroup.get('interests') as FormArray;
     
-    if (event.checked) {
-      roles.push(new FormControl(event.source.value))
-    } else {
-      const i = roles.controls.findIndex(x => x.value === event.source.value);
-      roles.removeAt(i);
-    }
-    console.log(this.interestFormGroup.value);
+    // if (event.checked) {
+    //   roles.push(new FormControl(event.source.value))
+    // } else {
+    //   const i = roles.controls.findIndex(x => x.value === event.source.value);
+    //   roles.removeAt(i);
+    // }
+    // console.log(this.interestFormGroup.value);
+   //  console.log(e);
     
   }
 }

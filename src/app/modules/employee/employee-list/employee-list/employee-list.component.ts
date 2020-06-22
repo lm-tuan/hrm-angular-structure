@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { zip } from 'rxjs';
 import { DepartmentService } from 'src/app/core/service/departmentService';
 import { UserService } from 'src/app/core/service/user.service';
 import { SkillService } from 'src/app/core/service/skillService';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
+import { findIndex } from 'lodash';
 
 @Component({
   selector: 'app-employee-list',
@@ -22,7 +23,10 @@ export class EmployeeListComponent implements OnInit {
   departments;
   dataSource;
   selection = new SelectionModel<any>(true, []);
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  dataTemp;
+  interestFormGroup: FormGroup;
+  ListChecked = [];
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(
     private router: Router,
     private userService: UserService,
@@ -37,8 +41,8 @@ export class EmployeeListComponent implements OnInit {
   }
 
 
-   // processing in parallel by use zip observable
-  fetchData(){
+  // processing in parallel by use zip observable
+  fetchData() {
     this.isLoading = true;
     setTimeout(() => {
       zip(
@@ -49,12 +53,13 @@ export class EmployeeListComponent implements OnInit {
         console.log('data', data);
         this.skills = data[0];
         this.dataSource = data[1];
+        this.dataTemp = data[1];
         this.dataSource = new MatTableDataSource<any>(this.dataSource);
         this.dataSource.paginator = this.paginator;
         this.departments = data[2];
         this.isLoading = false;
       }, err => {
-        if (err.status === 401){
+        if (err.status === 401) {
           this.router.navigate(['auth/login']);
         }
         console.log('err', err);
@@ -62,14 +67,14 @@ export class EmployeeListComponent implements OnInit {
     }, 1000);
   }
 
-  onLinkDetail(id){
+  onLinkDetail(id) {
     this.router.navigate(['employee/detail/', id]);
   }
 
-  onLinkEdit(id){
+  onLinkEdit(id) {
     this.router.navigate(['employee/edit/', id]);
   }
-  onDelete(id){
+  onDelete(id) {
     this.isLoading = true;
     setTimeout(() => {
       this.userService.delete(id).subscribe(data => {
@@ -78,7 +83,7 @@ export class EmployeeListComponent implements OnInit {
         this.fetchData();
       });
     },
-    2000);
+      2000);
   }
 
   private buildForm(): void {
@@ -88,17 +93,17 @@ export class EmployeeListComponent implements OnInit {
       searchSkill: new FormControl('', []),
     });
   }
-  search(){
+  search() {
     this.isLoading = true;
     const { searchDep, searchName, searchSkill } = this.searchForm.value;
     const searchUser = {
       departmentId: searchDep,
-      fullname : searchName,
+      fullname: searchName,
       skillId: searchSkill
     };
-    if(!searchDep && !searchName && !searchSkill  ){
+    if (!searchDep && !searchName && !searchSkill) {
       this.fetchData();
-    }else{
+    } else {
       console.log('searchUser', searchUser);
       setTimeout(() => {
         this.userService.getSearch(searchUser).subscribe(data => {
@@ -122,11 +127,37 @@ export class EmployeeListComponent implements OnInit {
     const numRows = this.dataSource?.filteredData.length;
     return numSelected === numRows;
   }
-   /** Selects all rows if they are not all selected; otherwise clear selection. */
-   masterToggle() {
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
     console.log('sdsds');
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.filteredData.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.dataSource.filteredData.forEach(row => this.selection.select(row));
+  }
+  onChange(event) {
+    const cb = event.source.value;
+    if (event.checked) {
+      this.ListChecked.push(cb);
+    } else {
+      const index = findIndex(this.ListChecked, (x) => x === cb);
+      this.ListChecked = [
+        ...this.ListChecked.slice(0, index),
+        ...this.ListChecked.slice(index + 1)
+      ];
+    }
+    console.log(this.ListChecked);
+    
+  }
+  onChangeAll(event){
+    this.ListChecked = [];
+    this.dataTemp.forEach(e => {
+      this.ListChecked.push(e.profile_id)
+    });
+    console.log(this.ListChecked)
+  }
+
+  removeAll() {
+    console.log("toang rồi");
+
   }
 }
