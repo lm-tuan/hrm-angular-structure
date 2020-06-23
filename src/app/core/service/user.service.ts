@@ -42,10 +42,9 @@ export class UserService {
   deleteAll(ids) {
     let url = '';
     ids.forEach(id => {
-      url += `ids=${id}?`;
+      url += `ids=${id}&`;
     });
-    url = url.substring(url.length - 1, url.length);
-    console.log('url', url);
-    return this.http.get(`${baseUrl}/delete-all?${url}`);
+    url = url.slice(0, -1);
+    return this.http.delete(`${baseUrl}/delete-all?${url}`);
   }
 }

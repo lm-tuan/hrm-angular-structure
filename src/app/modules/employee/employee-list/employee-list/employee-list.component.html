@@ -130,8 +130,8 @@
                                 >
     
                   </mat-checkbox>
-                  <button  mat-icon-button color="warn" aria-label="Example icon button with a menu icon">
-                    <mat-icon style="font-size: 25px; margin-top: 7px;">delete</mat-icon>
+                  <button (click)="removeAll()"  mat-icon-button color="warn" aria-label="Example icon button with a menu icon">
+                    <mat-icon style="font-size: 25px; margin-top: 3px;">delete</mat-icon>
                   </button>
                 </th>
                 <td mat-cell *matCellDef="let row"  >

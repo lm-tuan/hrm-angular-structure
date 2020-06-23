@@ -129,10 +129,15 @@ export class EmployeeListComponent implements OnInit {
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    console.log('sdsds');
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.filteredData.forEach(row => this.selection.select(row));
+      if( this.isAllSelected()){
+        this.ListChecked = [];
+        this.selection.clear();
+      }else {
+        this.dataTemp.forEach(e => {
+          this.ListChecked.push(e.profile_id)
+        });
+        this.dataSource.filteredData.forEach(row => this.selection.select(row));
+      }
   }
   onChange(event) {
     const cb = event.source.value;
@@ -149,25 +154,30 @@ export class EmployeeListComponent implements OnInit {
 
   }
   onChangeAll(event) {
-    this.ListChecked = [];
-    this.dataTemp.forEach(e => {
-      this.ListChecked.push(e.profile_id)
-    });
-    console.log(this.ListChecked)
+    console.log(event);
+    if(event.checked){
+      this.ListChecked = [];
+      this.dataTemp.forEach(e => {
+        this.ListChecked.push(e.profile_id);
+      });
+    }else {
+      this.ListChecked = [];
+    }
+    console.log(this.ListChecked);
   }
 
   removeAll() {
+    this.isLoading = true;
     setTimeout(() => {
-      this.isLoading = true;
       this.userService.deleteAll(this.ListChecked).subscribe((data: any) => {
-        if (data.staus === 200) {
-          this.isLoading = false;
+        console.log(data);
+        if (data.status === 200) {
+           this.fetchData();
+          // this.isLoading = false;
         }
       }, err => {
         console.log(err);
-
-      })
-      console.log("toang rồi");
-    }, 1000)
+      });
+    }, 2000);
   }
 }
